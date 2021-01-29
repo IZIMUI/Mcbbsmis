@@ -1,0 +1,81 @@
+{
+  "_from": "bilibili-live-ws",
+  "_id": "bilibili-live-ws@5.1.1",
+  "_inBundle": false,
+  "_integrity": "sha512-CAtq4LA2sEwVsVCRidSvkfCz/IU4Gar/0zemziuL2yOrlXKT1Rkl5K5UgUDUYjQ3VITHeQ4ZYH9p2MmYL1Ia7Q==",
+  "_location": "/bilibili-live-ws",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "bilibili-live-ws",
+    "name": "bilibili-live-ws",
+    "escapedName": "bilibili-live-ws",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/bilibili-live-ws/-/bilibili-live-ws-5.1.1.tgz",
+  "_shasum": "b78ebad992afd1ba967583284d7e36b9b7b9cc46",
+  "_spec": "bilibili-live-ws",
+  "_where": "/storage/emulated/0",
+  "author": {
+    "name": "simon3000",
+    "email": "simon3000@163.com"
+  },
+  "bugs": {
+    "url": "https://github.com/simon300000/bilibili-live-ws/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "got": "^11.1.4",
+    "isomorphic-ws": "^4.0.1",
+    "ws": "^7.2.0"
+  },
+  "deprecated": false,
+  "description": "Bilibili Live WebSocket/TCP API",
+  "devDependencies": {
+    "@types/chai": "^4.2.8",
+    "@types/mocha": "^7.0.1",
+    "@types/node": "^13.7.0",
+    "@types/ws": "^7.2.1",
+    "chai": "^4.2.0",
+    "coveralls": "^3.0.6",
+    "got": "^11.1.4",
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.7.5"
+  },
+  "homepage": "https://github.com/simon300000/bilibili-live-ws#readme",
+  "keywords": [
+    "bilibili",
+    "api",
+    "websocket",
+    "live",
+    "ws",
+    "tcp"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "bilibili-live-ws",
+  "optionalDependencies": {
+    "got": "^11.1.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simon300000/bilibili-live-ws.git"
+  },
+  "scripts": {
+    "clear": "rm index.js index.d.ts  extra.js extra.d.ts src/*.js src/*.d.ts;exit 0",
+    "coverage": "mkdir coverage; nyc report --reporter=text-lcov >> ./coverage/lcov.info",
+    "test": "npm run clear; npm run unit",
+    "tsc": "tsc -b",
+    "unit": "nyc mocha --reporter=landing -r ts-node/register test/*.ts"
+  },
+  "version": "5.1.1"
+}

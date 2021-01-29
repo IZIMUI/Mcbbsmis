@@ -1,0 +1,112 @@
+{
+    "name": "mcbbsmis",
+    "description": "Minecraft Connect Bind BiliBili Sync Mutual Message Interaction Service (Beta)",
+    "author": {
+        "name": "lZiMUl",
+        "email": "AA2908554069@gmail.com",
+        "url": "https://b23.tv/iIlvcE"
+    },
+    "contributors": [{
+        "name": "lZiMUl",
+        "email": "AA2908554069@gmail.com",
+        "url": "https://b23.tv/iIlvcE"
+    }],
+    "version": "17.16.56",
+    "license": "MIT",
+    "homepage": "https://b23.tv/iIlvcE",
+    "main": "./Srcs/MainActivity.JS",
+    "scripts": {
+        "OpenService": "cd .. && ls && node Mcbbsmis",
+        "Building": "vim ./Configs/Building.JSON && cd ..",
+        "Lottery": "vim ./Configs/Lottery.JSON && cd ..",
+        "ServiceConfig": "vim ./Configs/ServiceConfig.JSON && cd ..",
+        "UserLists": "vim ./Configs/UserLists.JSON && cd ..",
+        "Plugins": "pwd && ls Plugins/ && cd ..",
+        "Structure": "ls && cd .."
+    },
+    "config": {
+     "Help": {
+      "Send": "$B-Send:Message",
+      "Config": [{
+       "AddBlacklists": "$-Config:Blacklists Add UserName",
+       "DeleteBlacklists": "$-Config:Blacklists Delete UserName",
+       "AddCmdUsers": "$-Config:CmdUsers Add UserName",
+       "DeleteCmdUsers": "$-Config:CmdUsers Delete UserName"
+      }],
+      "Function": [{
+       "BuildLocal": "O-Function:Building Local Path",
+       "BuildingOnline": "O-Function:Building Online Url",
+       "Lottery": "O-Function:Lottery"
+      }]
+     }
+    },
+    "keywords": [
+        "lZiMUl",
+        "Chat",
+        "Minecraft",
+        "BiliBili",
+        "WebSocket",
+        "Service",
+        "Server",
+        "Interaction"
+    ],
+    "files": [
+        "./Configs/*.JSON",
+        "./Logs/Successs/*.LOG",
+        "./Logs/Errors/*.LOG",
+        "./Plugins/*",
+        "./License",
+        "./Srcs/*.JS",
+        "./Package.JSON",
+        "./Package-Lock.JSON",
+        "./Readme.MD"
+    ],
+    "directories": {
+        "Building.JSON": "./Configs/Building.JSON",
+        "Lottery.JSON": "./Configs/Lottery.JSON",
+        "ServiceConfig.INI": "./Configs/ServiceConfig.INI",
+        "UserLists.JSON": "./Configs/UserLists.JSON",
+        "Success.LOG": "./Logs/Successs/*.LOG",
+        "Error.LOG": "./Logs/Errors/*.LOG",
+        "Plugin": "./Plugins/*",
+        "License": "./License/",
+        "BuildingGenerator.JS": "./Plugins/BuildingGenerator/MainActivity.JS",
+        "Lottery.JS": "./Plugins/Lottery/MainActivity.JS",
+        "MainActivity.JS": "./Srcs/MainActivity.JS",
+        "Package.JSON": "./Package.JSON",
+        "Package-Lock.JSON": "./Package-Lock.JSON",
+        "Readme.MD": "./Readme.MD"
+    },
+    "engines": {
+        "node": "^14.14.0"
+    },
+    "dependencies": {
+        "ws": "^7.4.0",
+        "ini": "^2.0.0",
+        "bilibili-live-ws": "^5.1.1",
+        "querystring": "^0.2.0"
+    },
+    "devDependencies": {
+        "ws": "^7.4.0",
+        "ini": "^2.0.0",
+        "bilibili-live-ws": "^5.1.1",
+        "querystring": "^0.2.0"
+    },
+    "bundledDependencies": {
+        "ws": "^7.4.0",
+        "ini": "^2.0.0",
+        "bilibili-live-ws": "^5.1.1",
+        "querystring": "^0.2.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lZiMUl/Mcbbsmis.git"
+    },
+    "bugs": {
+        "url": "https://github.com/lZiMUl/Mcbbsmis/issues",
+        "email": "AA2908554069@gmail.com"
+    },
+    "private": false,
+    "preferGlobal": true,
+    "deprecated": false
+}
