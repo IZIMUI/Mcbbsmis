@@ -13,7 +13,7 @@ const {LiveTCP} = require ('bilibili-live-ws');
 
 const Bg = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/BuildingGenerator/MainActivity.JS'));
 const Lottery = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/Lottery/MainActivity.JS'));
-const Tte = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/TimerTriggerEvent/MainActivity.JS'));
+const Tte = new require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/TimerTriggerEvent/MainActivity.JS'));
 
 //基對象定義
 const ReadConfig = FileName => JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/', `${FileName}.JSON`))));
@@ -289,7 +289,7 @@ new Ws ['Server'] (new Object ({
                 //解析消息
                 let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('B-Send:');
                 let ParseConfigs = ParseData ['body'] ['properties'] ['Message'] ['split'] ('B-Config:');
-                let ParseFunction = ParseData ['body'] ['properties'] ['Message'] ['split'] ('O-Function:');
+                let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('O-Plugin:');
                 //判斷命令前綴
                 if (ParseMessage [0] === '$')
                 //將玩家聊天消息發送至BiliBili直播間
@@ -343,24 +343,33 @@ new Ws ['Server'] (new Object ({
                             SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在')
                     }
                 };
-                if (ParseFunction [0] === '$') {
-                    let ParseFunctions = ParseFunction [1] ['split'] (' ');
-                    switch (ParseFunctions [0]) {
+                if (ParsePlugin [0] === '$') {
+                    let ParsePlugins = ParsePlugin [1] ['split'] (' ');
+                    switch (ParsePlugins [0]) {
                         case 'Building':
-                            switch (ParseFunctions [1]) {
+                            switch (ParsePlugins [1]) {
                                 case 'Local':
-                                    new Bg (Socket, 'Local', ParseFunctions [2]);
+                                    new Bg (Socket, 'Local', ParsePlugins [2]);
                                 break;
                                 
                                 case 'Online':
-                                    new Bg (Socket, 'Online', ParseFunctions [2])
+                                    new Bg (Socket, 'Online', ParsePlugins [2])
                                 break;
                             };
                         break;
                         
                         case 'Lottery':
                             GetLottery ('Lottery');
-                        break
+                        break;
+                        
+                        case 'Tte':
+                        	if (ParsePlugin ['indexOf'] ('#')) {
+                           Tte ['SetTimerListener'] (ParsePlugins [1], ParsePlugin [1] ['substring'] (ParsePlugin ['indexOf'] ('#'), ParsePlugin ['lastIndexOf'] ('#')))
+                           SendMTM ('§b(§3Mcbbsmis§b) §9Status §a定時命令設置成功')
+                        	}
+                        	else
+                        	SendMTM ('§b(§3Mcbbsmis§b) §9Status §4定時命令設置失敗')
+                           break
                     }
                 }
             }

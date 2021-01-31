@@ -14,9 +14,7 @@
 
 ## 這個版本內容
 ### 新內容
-* 1.添加了用戶進入直播間提示
-* 2.添加了建築物生成擴展服務
-* 3.添加了禮品袋隨機抽獎服務
+* 1.添加了定時執行命令
 </Br>
 
 ### 新命令
@@ -25,17 +23,18 @@
 * 3.添加命令使用者: $B-Config:CmdUsers Add 用戶名
 * 4.刪除命令使用者: $B-Config:CmdUsers Delete 用戶名
 * 5.發送關鍵詞命令: $M-Send:關鍵詞
-* 6.建築物本地生成命令: $O-Function:Building Local 建築物文件名
-* 7.建築物網絡生成命令: $O-Function:Building Online 建築物文件鏈接
-* 8.禮品袋隨機抽獎命令: $O-Function:Lottery
+* 6.建築物本地生成命令: $O-Plugin:Building Local 建築物文件名
+* 7.建築物網絡生成命令: $O-Plugin:Building Online 建築物文件鏈接
+* 8.禮品袋隨機抽獎命令: $O-Plugin:Lottery
+* 9.定時命令: $O-Plugin:Tte 8:07:47 #Say Hello Mcbbsmis#
 </Br>
 
 ### 基本命令
 * 1.發送彈幕命令: $B-Send:消息
 * 2.設定用戶配置: $B-Config:選項
 * 3.發送關鍵詞命令: $M-Send:關鍵詞
-* 4.生成建築物命令: $O-Function:Building 選項
-* 5.禮品袋抽獎命令: $O-Function:Lottery
+* 4.生成建築物命令: $O-Plugin:Building 選項
+* 5.禮品袋抽獎命令: $O-Plugin:Lottery
 </Br>
 
 ## 項目目錄結構
@@ -48,7 +47,7 @@
     * Logs
         * Successs
         * Errors
-    * Plugin
+    * Plugins
         * BuildingGenerator
             * MainActivity.JS
         * Lottery
@@ -68,7 +67,7 @@
 * 4.進入 [Minecraft] 進入存檔 (前提: 必須打開作弊功能) 打開聊天欄粘貼連接命令回車。
 * 5.輸入發送彈幕命令 [$B-Send:消息]。
 * 6.打開BiliBili並進入您的直播間查看彈幕即可。
-* 7.如有錯誤，請在Github上提出問題即可 (https://github.com/IZIMUI/Mcbbsmis/issues)。
+* 7.如有錯誤，請在Github上提出問題即可 (https://github.com/lZiMUl/Mcbbsmis/issues)。
 * 8.教程完畢。
 </Br>
 

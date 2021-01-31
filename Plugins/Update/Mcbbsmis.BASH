@@ -54,7 +54,7 @@ Config () {
 			vim ./Mcbbsmis/Configs/ServiceConfig.INI;
 			sleep 1;
 			MainActivity;;
-		"否") MainActivity;
+		"否")
 			sleep 1;
 			MainActivity;;
 		*) echo "您在說什麼啊";
@@ -78,11 +78,7 @@ Install () {
 		echo "正在安裝,請稍等...";
 		npm install mcbbsmis;
 		mv ./node_modules/mcbbsmis ./Mcbbsmis;
-		mkdir ./Mcbbsmis/Node_Modules;
-		mv ./node_modules/ws ./Mcbbsmis/Node_Modules/ws;
-		mv ./node_modules/ini ./Mcbbsmis/Node_Modules/ini;
-		mv ./node_modules/bilibili-live-ws ./Mcbbsmis/Node_Modules/bilibili-live-ws;
-		mv ./node_modules/isomorphic-ws ./Mcbbsmis/Node_Modules/isomorphic-ws;
+		mv ./node_modules/ ./Mcbbsmis/Node_Modules/;
 		mkdir -p ./Mcbbsmis/Logs/Success;
 		mkdir ./Mcbbsmis/Logs/Errors;
 		rm ./package-lock.json;
