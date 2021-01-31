@@ -20,7 +20,7 @@ class TimerTriggerEvent {
 	
 	SetTimerListener (Time, Event, Err) {
 		if (Time && Event && Object ['prototype'] ['toString'] ['call'] (Time) === '[object String]' && Object ['prototype'] ['toString'] ['call'] (Event) === '[object Function]' || Err? Object ['prototype'] ['toString'] ['call'] (Err) === '[object Function]': false)
-		TimerTriggerEvent ['EventTable'] ['push'] (new Object ({]
+		TimerTriggerEvent ['EventTable'] ['push'] (new Object ({
 			"Time": new Date (`${new Date () ['getFullYear'] ()}/${new Date () ['getMonth'] ()}/${new Date () ['getDate'] ()} ${Time}`),
 			"Event": Event,
 			"Error": Err || function () {}
