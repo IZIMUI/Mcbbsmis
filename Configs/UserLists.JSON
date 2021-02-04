@@ -1,1 +1,1 @@
-{"Blacklists":[],"CmdUsers":["lZiMUl"],"Commands":{"生存":"/Gamemode 0 @s","创造":"/Gamemode 1 @s","自我了断":"/Kill @s"}}
+{"Blacklists":[],"CmdUsers":["lZiMUl"],"Commands":{"生存":"/Gamemode 0 @s","创造":"/Gamemode 1 @s","彻底去世":"/Kill @s","上天":"/Tp @s ~ 255 ~"}}

@@ -18,7 +18,7 @@ const Tte = new require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/T
 //基對象定義
 const ReadConfig = FileName => JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/', `${FileName}.JSON`))));
 const ServiceConfig = Ini ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/ServiceConfig.INI'))));
-const UserLists = Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/UserLists.JSON');
+const UserLists = JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/UserLists.JSON'))));
 
 var MonitorLock = false;
 var WebSocket = null;
@@ -115,17 +115,17 @@ function GetLottery (Name) {
 }
 
 //添加
-function Add (UserName, Rc, Key) {
-    Rc [Key] ['push'] (UserName);
-    Fs ['writeFile'] (UserLists, JSON ['stringify'] (Rc), () => null);
+function Add (UserName, Key) {
+    UserLists [Key] ['push'] (UserName);
+    Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/UserLists.JSON'), JSON ['stringify'] (UserLists), () => null);
 };
 
 //刪除
-function Delete (UserName, Rc, Key) {
-    let Point = Rc [Key] ['indexOf'] (UserName);
+function Delete (UserName, Key) {
+    let Point = UserLists [Key] ['indexOf'] (UserName);
     if (Point > -1)
-    Rc [Key] ['splice'] (Point, 1);
-    Fs ['writeFile'] (UserLists, JSON ['stringify'] (Rc), () => null)
+    UserLists [Key] ['splice'] (Point, 1);
+    Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/UserLists.JSON'), JSON ['stringify'] (UserLists), () => null)
 };
 
 //判斷用戶是否存在
@@ -141,11 +141,11 @@ function JudgeUsersExist (UserName, Rc) {
 function UpdateBlacklists (UserName, Mode) {
     switch (Mode) {
         case 'Add':
-            Add (UserName, ReadConfig ('UserLists'), 'Blacklists');
+            Add (UserName,'Blacklists');
         break;
         
         case 'Delete':
-            Delete (UserName, ReadConfig ('UserLists'), 'Blacklists');
+            Delete (UserName, 'Blacklists');
         break
     }
 };
@@ -154,11 +154,11 @@ function UpdateBlacklists (UserName, Mode) {
 function UpdateCmdUsers (UserName, Mode) {
     switch (Mode) {
         case 'Add':
-            Add (UserName, ReadConfig ('UserLists'), 'CmdUsers');
+            Add (UserName, 'CmdUsers');
         break;
             
         case 'Delete':
-            Delete (UserName, ReadConfig ('UserLists'), 'CmdUsers');
+            Delete (UserName, 'CmdUsers');
         break
     }
 };
@@ -174,7 +174,7 @@ function Verify (Data) {
 
 //判斷用戶是否有發送命令的權限
 function VerifyUsers (UserName) {
-    let Users = ReadConfig ('UserLists') ['CmdUsers'];
+    let Users = UserLists ['CmdUsers'];
     for (let Value = 0; Value < Users ['length']; Value ++)
     if (UserName ['toUpperCase'] () === Users [Value] ['toUpperCase'] ())
     return true;
@@ -238,19 +238,14 @@ function Monitor (RoomID) {
                 let User = Message ['info'] [2];
                 let ParseMessage = Message ['info'] [1] ['split'] ('M-Send:');
                 if (ParseMessage [0] === '$')
-                if (VerifyUsers (User [1]))
-                for (let Key in UserLists || new Object ({
-                	"生存":"/Gamemode 0 @s",
-                	"创造":"/Gamemode 1 @s",
-                	"自我了断":"/Kill @s"
-                }) ['Commands'])
+                if (VerifyUsers (User [1])) {
+                for (let Key in UserLists ['Commands'])
                 if (ParseMessage [1] === Key)
-                SendCMD (UserLists || new Object ({
-                	"生存":"/Gamemode 0 @s",
-                	"创造":"/Gamemode 1 @s",
-                	"自我了断":"/Kill @s"
-                }) ['Commands'] [Key])
-                if (!JudgeUsersExist (User [1], ReadConfig ('UserLists') ['Blacklists']))
+                SendCMD (UserLists ['Commands'] [Key]);
+                SendToBL ('該命令不存在，請查證後發送');
+                } else
+                SendToBL ('[Mcbbsmis] 對不起，您沒有使用命令的權限')
+                if (!JudgeUsersExist (User [1], UserLists ['Blacklists']))
                 SendMTM (`§b(§3Mcbbsmis§b) §9Barrage §b[§c${User [1]}§b]§d: §6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
             break;
             
@@ -300,7 +295,7 @@ new Ws ['Server'] (new Object ({
                         case 'Blacklists':
                             switch (ParseConfigM [1]) {
                                 case 'Add':
-                                    if (JudgeUsersExist (ParseConfigM [2], ReadConfig ('UserLists') ['Blacklists']))
+                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['Blacklists']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經在黑名單列表裡');
                                     else {
                                     UpdateBlacklists (ParseConfigM [2], 'Add');
@@ -309,7 +304,7 @@ new Ws ['Server'] (new Object ({
                                 break;
                                     
                                 case 'Delete':
-                                    if (!JudgeUsersExist (ParseConfigM [2], ReadConfig ('UserLists') ['Blacklists']))
+                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['Blacklists']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶不在黑名單列表裡');
                                     else {
                                     UpdateBlacklists (ParseConfigM [2], 'Delete');
@@ -321,7 +316,7 @@ new Ws ['Server'] (new Object ({
                         case 'CmdUsers':
                             switch (ParseConfigM [1]) {
                                 case 'Add':
-                                    if (JudgeUsersExist (ParseConfigM [2], ReadConfig ('UserLists') ['CmdUsers']))
+                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['CmdUsers']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經是命令使用者');
                                     else {
                                     UpdateCmdUsers (ParseConfigM [2], 'Add');
@@ -330,7 +325,7 @@ new Ws ['Server'] (new Object ({
                                 break;
                                 
                                 case 'Delete':
-                                    if (!JudgeUsersExist (ParseConfigM [2], ReadConfig ('UserLists') ['CmdUsers']))
+                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['CmdUsers']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經不是命令使用者');
                                     else {
                                     UpdateCmdUsers (ParseConfigM [2], 'Delete');
@@ -367,9 +362,12 @@ new Ws ['Server'] (new Object ({
                            Tte ['SetTimerListener'] (ParsePlugins [1], ParsePlugin [1] ['substring'] (ParsePlugin ['indexOf'] ('#'), ParsePlugin ['lastIndexOf'] ('#')))
                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §a定時命令設置成功')
                         	}
-                        	else
-                        	SendMTM ('§b(§3Mcbbsmis§b) §9Status §4定時命令設置失敗')
-                           break
+                        else
+                          SendMTM ('§b(§3Mcbbsmis§b) §9Status §4定時命令設置失敗')
+                         break;
+                           
+                        default:
+                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該擴展插件屬性不存在')
                     }
                 }
             }

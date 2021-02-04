@@ -76,13 +76,7 @@ Install () {
 		MainActivity;
 	else
 		echo "正在安裝,請稍等...";
-		npm install mcbbsmis;
-		mv ./node_modules/mcbbsmis ./Mcbbsmis;
-		mv ./node_modules/ ./Mcbbsmis/Node_Modules/;
-		mkdir -p ./Mcbbsmis/Logs/Success;
-		mkdir ./Mcbbsmis/Logs/Errors;
-		rm ./package-lock.json;
-		rm -rf ./node_modules;
+		git clone https://github.com/lZiMUl/Mcbbsmis.git
 		echo "$Name安裝完畢";
 		sleep 1;
 		MainActivity;
@@ -120,18 +114,7 @@ Update () {
 		echo "正在更新$Name,請稍等...";
 		mv ./Mcbbsmis/Configs ./Configs;
 		rm -rf ./Mcbbsmis;
-		npm install mcbbsmis;
-		mv ./node_modules/mcbbsmis ./Mcbbsmis;
-		mkdir ./Mcbbsmis/Node_Modules;
-		mv ./node_modules/ws ./Mcbbsmis/Node_Modules/ws;
-		mv ./node_modules/ini ./Mcbbsmis/Node_Modules/ini;
-		mv ./node_modules/bilibili-live-ws ./Mcbbsmis/Node_Modules/bilibili-live-ws;
-		mv ./node_modules/isomorphic-ws ./Mcbbsmis/Node_Modules/isomorphic-ws;
-		mkdir -p ./Mcbbsmis/Logs/Success;
-		mkdir ./Mcbbsmis/Logs/Errors;
-		rm -rf ./Mcbbsmis/Configs;
-		rm ./package-lock.json;
-		rm -rf ./node_modules;
+		git clone https://github.com/lZiMUl/Mcbbsmis.git
 		mv ./Configs ./Mcbbsmis/Configs;
 		echo "$Name更新完畢";
 		sleep 1;
