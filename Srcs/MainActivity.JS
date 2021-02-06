@@ -40,19 +40,6 @@ const Configuration = new Object ({
     }
 });
 
-//返回彈幕發送狀態函數
-function Response (Socket) {
-    Socket ['on'] ('data', Message => {
-        let Status = JSON ['parse'] (Message)
-        if (Status ['code'] === 0 && Status ['message'] === '')
-        SendMTM ('§b(§3Mcbbsmis§b) §9Status §a發送成功');
-        else if (Status ['code'] === 0 && Status ['message'] === '非法内容')
-        SendMTM ('§b(§3Mcbbsmis§b) §9Status §4非法內容');
-        else
-        SendMTM (`§b(§3Mcbbsmis§b) §9Status §4${JSON ['stringify'] (Status)}`)
-    })
-}
-
 //向遊戲客戶端發送訂閱事件函數
 function Subscribe (Socket, EventArray) {
     EventArray ['forEach'] (Event => Socket ['send'] (JSON ['stringify'] (new Object ({
@@ -110,7 +97,7 @@ function SendCMD (Command) {
 function GetLottery (Name) {
     new Lottery (ReadConfig (Name)) ['then'] (async Resource => {
         SendMTM (`§b(§3Mcbbsmis§b) §9Lottery §5恭喜 §b[§c${Configuration ['Minecraft'] ['XboxID']}§b] §5在 §6${Resource ['Title']} §5禮品中獲得 §6${Resource ['Data'] ['Quantity']} §5個 §6${Resource ['Data'] ['Title']}`);
-        SendCMD (`Give @s ${Resource ['Data'] ['Id']} ${Resource ['Data'] ['Quantity']}`)
+        SendCMD (`Give ${Configuration ['Minecraft'] ['XboxID']} ${Resource ['Data'] ['Id']} ${Resource ['Data'] ['Quantity']}`)
     });
 }
 
@@ -150,15 +137,15 @@ function UpdateBlacklists (UserName, Mode) {
     }
 };
 
-//更新命令使用者
-function UpdateCmdUsers (UserName, Mode) {
+//更新關鍵詞使用者
+function UpdateKeywordUsers (UserName, Mode) {
     switch (Mode) {
         case 'Add':
-            Add (UserName, 'CmdUsers');
+            Add (UserName, 'KeywordUsers');
         break;
             
         case 'Delete':
-            Delete (UserName, 'CmdUsers');
+            Delete (UserName, 'KeywordUsers');
         break
     }
 };
@@ -174,7 +161,7 @@ function Verify (Data) {
 
 //判斷用戶是否有發送命令的權限
 function VerifyUsers (UserName) {
-    let Users = UserLists ['CmdUsers'];
+    let Users = UserLists ['KeywordUsers'];
     for (let Value = 0; Value < Users ['length']; Value ++)
     if (UserName ['toUpperCase'] () === Users [Value] ['toUpperCase'] ())
     return true;
@@ -182,7 +169,7 @@ function VerifyUsers (UserName) {
 };
 
 //將玩家聊天消息發送至直播間函數
-function SendToBL (Message) {
+function SendToBL (Message, Rcs) {
     //消息進行編碼
     let EncodeMessage =  Querystring ['encode'] (new Object ({
         "color": 16777215,
@@ -219,7 +206,19 @@ function SendToBL (Message) {
             "Cookie": Configuration ['BiliBili'] ['Cookie']
         }});
     //開始請求直播間
-    let Request = Http ['request'] (RequestConfiguration, Response);
+    let Request = Http ['request'] (RequestConfiguration, Socket => {
+    Socket ['on'] ('data', Message => {
+        let Status = JSON ['parse'] (Message);
+        if (Rcs)
+        if (Status ['code'] === 0 && Status ['message'] === '')
+        SendMTM ('§b(§3Mcbbsmis§b) §9Status §a發送成功');
+        else if (Status ['code'] === 0 && Status ['message'] === '非法内容')
+        SendMTM ('§b(§3Mcbbsmis§b) §9Status §4非法內容');
+        else
+        SendMTM (`§b(§3Mcbbsmis§b) §9Status §4${JSON ['stringify'] (Status)}`)
+    })
+}
+);
     //開始寫入消息
     Request ['write'] (EncodeMessage? EncodeMessage: null);
     //消息寫入完成
@@ -236,15 +235,14 @@ function Monitor (RoomID) {
             
             case 'DANMU_MSG':
                 let User = Message ['info'] [2];
-                let ParseMessage = Message ['info'] [1] ['split'] ('M-Send:');
+                let ParseMessage = Message ['info'] [1] ['split'] ('M-Keyword:');
                 if (ParseMessage [0] === '$')
                 if (VerifyUsers (User [1])) {
-                for (let Key in UserLists ['Commands'])
+                for (let Key in UserLists ['Keywords'])
                 if (ParseMessage [1] === Key)
-                SendCMD (UserLists ['Commands'] [Key]);
-                SendToBL ('該命令不存在，請查證後發送');
+                SendCMD (UserLists ['Keywords'] [Key]);
                 } else
-                SendToBL ('[Mcbbsmis] 對不起，您沒有使用命令的權限')
+                SendToBL ('对不起，您沒有使用關鍵詞的權限', false);
                 if (!JudgeUsersExist (User [1], UserLists ['Blacklists']))
                 SendMTM (`§b(§3Mcbbsmis§b) §9Barrage §b[§c${User [1]}§b]§d: §6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
             break;
@@ -288,7 +286,7 @@ new Ws ['Server'] (new Object ({
                 //判斷命令前綴
                 if (ParseMessage [0] === '$')
                 //將玩家聊天消息發送至BiliBili直播間
-                SendToBL (ParseMessage [1])
+                SendToBL (ParseMessage [1], true)
                 if (ParseConfigs [0] === '$') {
                     let ParseConfigM = ParseConfigs [1] ['split'] (' ');
                     switch (ParseConfigM [0]) {
@@ -313,23 +311,23 @@ new Ws ['Server'] (new Object ({
                             };
                         break;
                         
-                        case 'CmdUsers':
+                        case 'KeywordUsers':
                             switch (ParseConfigM [1]) {
                                 case 'Add':
-                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['CmdUsers']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經是命令使用者');
+                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['KeywordUsers']))
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經是關鍵詞使用者');
                                     else {
-                                    UpdateCmdUsers (ParseConfigM [2], 'Add');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已添加當前該用戶為命令使用者')
+                                    UpdateKeywordUsers (ParseConfigM [2], 'Add');
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已添加當前該用戶為關鍵詞使用者')
                                     }
                                 break;
                                 
                                 case 'Delete':
-                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['CmdUsers']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經不是命令使用者');
+                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['KeywordUsers']))
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經不是關鍵詞使用者');
                                     else {
-                                    UpdateCmdUsers (ParseConfigM [2], 'Delete');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為命令使用者')
+                                    UpdateKeywordUsers (ParseConfigM [2], 'Delete');
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為關鍵詞使用者')
                                     }
                             };
                         break;

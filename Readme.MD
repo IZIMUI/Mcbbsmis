@@ -20,21 +20,22 @@
 ### 新命令
 * 1.添加彈幕黑名單: $B-Config:Blacklists Add 用戶名
 * 2.刪除彈幕黑名單: $B-Config:Blacklists Delete 用戶名
-* 3.添加命令使用者: $B-Config:CmdUsers Add 用戶名
-* 4.刪除命令使用者: $B-Config:CmdUsers Delete 用戶名
-* 5.發送關鍵詞命令: $M-Send:關鍵詞
+* 3.添加關鍵詞使用者: $B-Config:KeywordUsers Add 用戶名
+* 4.刪除關鍵詞使用者: $B-Config:KeywordUsers Delete 用戶名
+* 5.發送關鍵詞命令: $M-Keyword:關鍵詞
 * 6.建築物本地生成命令: $O-Plugin:Building Local 建築物文件名
 * 7.建築物網絡生成命令: $O-Plugin:Building Online 建築物文件鏈接
 * 8.禮品袋隨機抽獎命令: $O-Plugin:Lottery
-* 9.定時命令: $O-Plugin:Tte 8:07:47 #Say Hello Mcbbsmis#
+* 9.定時命令: $O-Plugin:Tte Time Commands
 </Br>
 
 ### 基本命令
 * 1.發送彈幕命令: $B-Send:消息
 * 2.設定用戶配置: $B-Config:選項
-* 3.發送關鍵詞命令: $M-Send:關鍵詞
+* 3.發送關鍵詞命令: $M-Keyword:關鍵詞
 * 4.生成建築物命令: $O-Plugin:Building 選項
 * 5.禮品袋抽獎命令: $O-Plugin:Lottery
+* 6.定時命令: $O-Plugin:Tte Time Commands
 </Br>
 
 ## 項目目錄結構
