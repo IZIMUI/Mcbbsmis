@@ -1,1 +1,1 @@
-{"Blacklists":[],"KeywordUsers":["My_world","触手TV紫幕"],"Keywords":{"生存":"/Gamemode 0 @s","创造":"/Gamemode 1 @s","彻底去世":"/Kill @s","上天":"/Tp @s ~ 255 ~"}}
+{"Blacklists":[],"KeywordUsers":["lZiMUl"],"Keywords":{"生存":"Gamemode 0 @s","创造":"Gamemode 1 @s","白天":"Time Set Day","黑天":"Time Set Night","原地去世":"Kill @s","上天":"Tp @s ~ 255 ~"},"RandomEvent":["Summon Zombie ~ ~ ~","SetBlock ~ ~ ~ Tnt"]}

@@ -36,7 +36,8 @@ const Configuration = new Object ({
         "RoomID": ServiceConfig ['BiliBili'] ['RoomID'] || 9329583,
         "Csrf": ServiceConfig ['BiliBili'] ['Csrf'] || null,
         "User-Agent": ServiceConfig ['BiliBili'] ['User-Agent'] || null,
-        "Cookie": ServiceConfig ['BiliBili'] ['Cookie'] || null
+        "Cookie": ServiceConfig ['BiliBili'] ['Cookie'] || null,
+        "RandomEvent": JSON ['parse'] (new Boolean (ServiceConfig ['BiliBili'] ['RandomEvent'] ['toLowerCase'] ())) || false,
     }
 });
 
@@ -227,35 +228,34 @@ function SendToBL (Message, Rcs) {
 
 //監聽直播間彈幕消息函數
 function Monitor (RoomID) {
-    new LiveTCP (RoomID) ['on'] ('msg', Message => {
-        switch (Message ['cmd']) {
-            case 'WELCOME':
-                SendMTM (`§b(§3Mcbbsmis§b) §9Welcome §5熱烈歡迎 §b[§c${Message ['data'] ['uname']}§b] §5進入了直播間`);
-            break;
-            
-            case 'DANMU_MSG':
-                let User = Message ['info'] [2];
-                let ParseMessage = Message ['info'] [1] ['split'] ('M-Keyword:');
-                if (ParseMessage [0] === '$')
-                if (VerifyUsers (User [1])) {
-                for (let Key in UserLists ['Keywords'])
-                if (ParseMessage [1] === Key)
-                SendCMD (UserLists ['Keywords'] [Key]);
-                } else
-                SendToBL ('对不起，您沒有使用關鍵詞的權限', false);
-                if (!JudgeUsersExist (User [1], UserLists ['Blacklists']))
-                SendMTM (`§b(§3Mcbbsmis§b) §9Barrage §b[§c${User [1]}§b]§d: §6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
-            break;
-            
-            case 'SEND_GIFT':
-                SendMTM (`§b(§3Mcbbsmis§b) §9Gift §b[§c${Message ['data'] ['uname']}§b]§d: §6${Message ['data'] ['action']}了 ${Message ['data'] ['num']}个 ${Message ['data'] ['giftName']}`);
-            break;
-            
-            case 'WELCOME_GUARD':
-                SendMTM (`§b(§3Mcbbsmis§b) §9Grandpa §5熱烈歡迎姥爺 §b[§c${Message ['data'] ['username']}§b] §5進入了直播間`);
-            break;
-        }
+    const Live = new LiveTCP (RoomID);
+    //觀眾進入監聽
+    Live ['on'] ('WELCOME', Message => {
+    	SendMTM (`§b(§3Mcbbsmis§b) §9Welcome §5熱烈歡迎 §b[§c${Message ['data'] ['uname']}§b] §5進入了直播間`);
     });
+    
+    //彈幕監聽
+    Live ['on'] ('DANMU_MSG', Message => {
+        let User = Message ['info'] [2];
+        let ParseMessage = Message ['info'] [1] ['split'] ('M-Keyword:');
+        if (ParseMessage [0] === '$')
+        if (VerifyUsers (User [1])) {
+          for (let Key in UserLists ['Keywords'])
+          if (ParseMessage [1] === Key)
+            SendCMD (UserLists ['Keywords'] [Key]);
+        } else
+        SendToBL ('对不起，您沒有使用關鍵詞的權限', false);
+        if (!JudgeUsersExist (User [1], UserLists ['Blacklists']))
+        SendMTM (`§b(§3Mcbbsmis§b) §9Barrage §b[§c${User [1]}§b]§d: §6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
+    });
+    
+    //禮物監聽
+    Live ['on'] ('SEND_GIFT', Message => {
+    	SendMTM (`§b(§3Mcbbsmis§b) §9Gift §b[§c${Message ['data'] ['uname']}§b]§d: §6${Message ['data'] ['action']}了 ${Message ['data'] ['num']}个 ${Message ['data'] ['giftName']}`);
+    	if (Configuration ['BiliBili'] ['RandomEvent'])
+    	SendCMD (UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])])
+    });
+
     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a連接成功 正在監聽直播間彈幕');
 };
 
@@ -356,7 +356,7 @@ new Ws ['Server'] (new Object ({
                         break;
                         
                         case 'Tte':
-                        	if (ParsePlugin ['indexOf'] ('#')) {
+                        	if (ParsePlugin [1] ['indexOf'] ('#')) {
                            Tte ['SetTimerListener'] (ParsePlugins [1], ParsePlugin [1] ['substring'] (ParsePlugin ['indexOf'] ('#'), ParsePlugin ['lastIndexOf'] ('#')))
                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §a定時命令設置成功')
                         	}
