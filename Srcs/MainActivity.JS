@@ -38,6 +38,14 @@ const Configuration = new Object ({
         "User-Agent": ServiceConfig ['BiliBili'] ['User-Agent'] || null,
         "Cookie": ServiceConfig ['BiliBili'] ['Cookie'] || null,
         "RandomEvent": JSON ['parse'] (new Boolean (ServiceConfig ['BiliBili'] ['RandomEvent'] ['toLowerCase'] ())) || false,
+        "GiftName": ServiceConfig ['BiliBili'] ['GiftName'] ['split'] ('#') || new Array ("吃瓜", "冰阔落"),
+        "GiftQuantity": function (Group) {
+        	let Table = new Array;
+        	Group ['forEach'] (Value => {
+        		Table ['push'] (new Number (Value));
+        	});
+        	return Table;
+        	} (ServiceConfig ['BiliBili'] ['GiftQuantity'] ['split'] ('#')) || new Array (6, 18)
     }
 });
 
@@ -101,6 +109,22 @@ function GetLottery (Name) {
         SendCMD (`Give ${Configuration ['Minecraft'] ['XboxID']} ${Resource ['Data'] ['Id']} ${Resource ['Data'] ['Quantity']}`)
     });
 }
+
+//匹配礼物名称
+function GiftName (Name) {
+	for (let Value = 0; Value < Configuration ['BiliBili'] ['GiftName'] ['length']; Value ++)
+	if (Configuration ['BiliBili'] ['GiftName'] [Value] === Name)
+	return true;
+	return false;
+};
+
+//匹配礼物数量
+function GiftQuantity (Quantity) {
+	for (let Value = 0; Value < Configuration ['BiliBili'] ['GiftQuantity'] ['length']; Value ++)
+	if (Configuration ['BiliBili'] ['GiftQuantity'] [Value] === Name)
+	return true;
+	return false;
+};
 
 //添加
 function Add (UserName, Key) {
@@ -253,7 +277,8 @@ function Monitor (RoomID) {
     Live ['on'] ('SEND_GIFT', Message => {
     	SendMTM (`§b(§3Mcbbsmis§b) §9Gift §b[§c${Message ['data'] ['uname']}§b]§d: §6${Message ['data'] ['action']}了 ${Message ['data'] ['num']}个 ${Message ['data'] ['giftName']}`);
     	if (Configuration ['BiliBili'] ['RandomEvent'])
-    	SendCMD (UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])])
+    	if (GiftQuantity (Message ['data'] ['num']) && GiftName (Message ['data'] ['giftName']))
+    	SendCMD (UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])] ['Command'])
     });
 
     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a連接成功 正在監聽直播間彈幕');
