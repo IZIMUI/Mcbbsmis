@@ -38,14 +38,8 @@ const Configuration = new Object ({
         "User-Agent": ServiceConfig ['BiliBili'] ['User-Agent'] || null,
         "Cookie": ServiceConfig ['BiliBili'] ['Cookie'] || null,
         "RandomEvent": JSON ['parse'] (new Boolean (ServiceConfig ['BiliBili'] ['RandomEvent'] ['toLowerCase'] ())) || false,
-        "GiftName": ServiceConfig ['BiliBili'] ['GiftName'] ['split'] ('#') || new Array ("吃瓜", "冰阔落"),
-        "GiftQuantity": function (Group) {
-        	let Table = new Array;
-        	Group ['forEach'] (Value => {
-        		Table ['push'] (new Number (Value));
-        	});
-        	return Table;
-        	} (ServiceConfig ['BiliBili'] ['GiftQuantity'] ['split'] ('#')) || new Array (6, 18)
+        "GiftName": ServiceConfig ['BiliBili'] ['GiftName'] ['split'] ('#') || new Array ("小心心", "辣条", "吃瓜", "冰阔落"),
+        "GiftQuantity": new Number (ServiceConfig ['BiliBili'] ['GiftQuantity']) || 1
     }
 });
 
@@ -114,14 +108,6 @@ function GetLottery (Name) {
 function GiftName (Name) {
 	for (let Value = 0; Value < Configuration ['BiliBili'] ['GiftName'] ['length']; Value ++)
 	if (Configuration ['BiliBili'] ['GiftName'] [Value] === Name)
-	return true;
-	return false;
-};
-
-//匹配礼物数量
-function GiftQuantity (Quantity) {
-	for (let Value = 0; Value < Configuration ['BiliBili'] ['GiftQuantity'] ['length']; Value ++)
-	if (Configuration ['BiliBili'] ['GiftQuantity'] [Value] === Name)
 	return true;
 	return false;
 };
@@ -276,9 +262,14 @@ function Monitor (RoomID) {
     //禮物監聽
     Live ['on'] ('SEND_GIFT', Message => {
     	SendMTM (`§b(§3Mcbbsmis§b) §9Gift §b[§c${Message ['data'] ['uname']}§b]§d: §6${Message ['data'] ['action']}了 ${Message ['data'] ['num']}个 ${Message ['data'] ['giftName']}`);
+   
+   
     	if (Configuration ['BiliBili'] ['RandomEvent'])
-    	if (GiftQuantity (Message ['data'] ['num']) && GiftName (Message ['data'] ['giftName']))
-    	SendCMD (UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])] ['Command'])
+    	if (GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Configuration ['BiliBili'] ['GiftQuantity']) {
+    		let RandomEvent = UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])];
+    	SendMTM  (`§b(§3Mcbbsmis§b) §9Status §a观众因投喂礼物触发事件为 §6${RandomEvent ['Tips']}`);
+    	SendCMD (RandomEvent ['Command']);
+    	};
     });
 
     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a連接成功 正在監聽直播間彈幕');
