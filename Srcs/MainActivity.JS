@@ -267,8 +267,8 @@ function Monitor (RoomID) {
     	if (Configuration ['BiliBili'] ['RandomEvent'])
     	if (GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Configuration ['BiliBili'] ['GiftQuantity']) {
     		let RandomEvent = UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])];
-    	SendMTM  (`§b(§3Mcbbsmis§b) §9Status §a观众因投喂礼物触发事件为 §6${RandomEvent ['Tips']}`);
-    	SendCMD (RandomEvent ['Command']);
+    	SendMTM  (`§b(§3Mcbbsmis§b) §9RandomEvents §b[§c${Message ['data'] ['uname']}§b]§d:§6因投喂礼物触发事件为 §6${RandomEvent ['Tips']}`);
+    	SendCMD (RandomEvent ['Command'] ['replace'] ('Player:XboxID', Configuration ['Minecraft'] ['XboxID']));
     	};
     });
 
