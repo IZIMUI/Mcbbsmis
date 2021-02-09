@@ -21,15 +21,17 @@
 </Br>
 
 ### 新命令
-* 1.添加彈幕黑名單: $B-Config:Blacklists Add 用戶名
-* 2.刪除彈幕黑名單: $B-Config:Blacklists Delete 用戶名
+* 1.添加彈幕黑名單: $B-Config:BarrageBlacklists Add 用戶名
+* 2.刪除彈幕黑名單: $B-Config:BarrageBlacklists Delete 用戶名
 * 3.添加關鍵詞使用者: $B-Config:KeywordUsers Add 用戶名
 * 4.刪除關鍵詞使用者: $B-Config:KeywordUsers Delete 用戶名
-* 5.發送關鍵詞命令: $M-Keyword:關鍵詞
-* 6.建築物本地生成命令: $O-Plugin:Building Local 建築物文件名
-* 7.建築物網絡生成命令: $O-Plugin:Building Online 建築物文件鏈接
-* 8.禮品袋隨機抽獎命令: $O-Plugin:Lottery
-* 9.定時器命令: $O-Plugin:Tte Time Commands
+* 5.添加投餵禮物觸發事件者: $B-Config:GiftWhitelists Add 用戶名
+* 6.刪除投餵禮物觸發事件者: $B-Config:GiftWhitelists Delete 用戶名
+* 7.發送關鍵詞命令: $M-Keyword:關鍵詞
+* 8.建築物本地生成命令: $O-Plugin:Building Local 建築物文件名
+* 9.建築物網絡生成命令: $O-Plugin:Building Online 建築物文件鏈接
+* 10.禮品袋隨機抽獎命令: $O-Plugin:Lottery
+* 11.定時器命令: $O-Plugin:Tte Time Commands
 </Br>
 
 ### 基本命令
