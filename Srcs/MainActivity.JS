@@ -261,17 +261,17 @@ function Monitor (RoomID) {
     
     //禮物監聽
     Live ['on'] ('SEND_GIFT', Message => {
-    	SendMTM (`§b(§3Mcbbsmis§b) §9Gift §b[§c${Message ['data'] ['uname']}§b]§d: §6${Message ['data'] ['action']}了 ${Message ['data'] ['num']}个 ${Message ['data'] ['giftName']}`);
+    	SendMTM (`§b(§3Mcbbsmis§b) §9Gift §b[§c${Message ['data'] ['uname']}§b]§d: §6${Message ['data'] ['action']}了 §b${Message ['data'] ['giftName']} §6* §a${Message ['data'] ['num']}`);
    
    
     	if (Configuration ['BiliBili'] ['RandomEvent'])
     	if (GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Configuration ['BiliBili'] ['GiftQuantity']) {
     		let RandomEvent = UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])];
-    	SendMTM  (`§b(§3Mcbbsmis§b) §9RandomEvents §b[§c${Message ['data'] ['uname']}§b]§d:§6因投喂礼物触发事件为 §6${RandomEvent ['Tips']}`);
-    	SendCMD (RandomEvent ['Command'] ['replace'] ('Player:XboxID', Configuration ['Minecraft'] ['XboxID']));
+    	let RandomNumber = Math ['floor'] (Math ['random'] () * 255);
+    	SendMTM  (`§b(§3Mcbbsmis§b) §9RandomEvents §b[§c${Message ['data'] ['uname']}§b]§d: §6因投喂 [§b${Message ['data'] ['giftName']} §6* §a${Message ['data'] ['num']}§6] 礼物触发事件为 §c[${RandomEvent ['Tips'] ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255)}]`);
+    	SendCMD (RandomEvent ['Command'] ['replace'] ('Player:XboxID', Configuration ['Minecraft'] ['XboxID']) ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255));
     	};
     });
-
     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a連接成功 正在監聽直播間彈幕');
 };
 
