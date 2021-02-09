@@ -4,16 +4,16 @@
     "author": {
         "name": "lZiMUl",
         "email": "AA2908554069@gmail.com",
-        "url": "https://b23.tv/iIlvcE"
+        "url": "https://b23.tv/ymEtPO"
     },
     "contributors": [{
         "name": "lZiMUl",
         "email": "AA2908554069@gmail.com",
-        "url": "https://b23.tv/iIlvcE"
+        "url": "https://b23.tv/ymEtPO"
     }],
-    "version": "18.17.67",
+    "version": "18.17.69",
     "license": "MIT",
-    "homepage": "https://b23.tv/iIlvcE",
+    "homepage": "https://b23.tv/ymEtPO",
     "main": "./Srcs/MainActivity.JS",
     "scripts": {
         "OpenService": "cd .. && ls && node Mcbbsmis",
