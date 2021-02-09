@@ -136,14 +136,14 @@ function JudgeUsersExist (UserName, Rc) {
 };
 
 //更新彈幕黑名單
-function UpdateBlacklists (UserName, Mode) {
+function UpdateBarrageBlacklists (UserName, Mode) {
     switch (Mode) {
         case 'Add':
-            Add (UserName,'Blacklists');
+            Add (UserName,'BarrageBlacklists');
         break;
         
         case 'Delete':
-            Delete (UserName, 'Blacklists');
+            Delete (UserName, 'BarrageBlacklists');
         break
     }
 };
@@ -161,6 +161,19 @@ function UpdateKeywordUsers (UserName, Mode) {
     }
 };
 
+//更新投喂礼物随机事件使用者
+function UpdateGiftWhitelists (UserName, Mode) {
+    switch (Mode) {
+        case 'Add':
+            Add (UserName, 'GiftWhitelists');
+        break;
+            
+        case 'Delete':
+            Delete (UserName, 'GiftWhitelists');
+        break
+    }
+};
+
 //驗證返回數據是否為玩家消息
 function Verify (Data) {
     if (Data ['body'] ['eventName'] === 'PlayerMessage')
@@ -170,9 +183,9 @@ function Verify (Data) {
     return false
 };
 
-//判斷用戶是否有發送命令的權限
-function VerifyUsers (UserName) {
-    let Users = UserLists ['KeywordUsers'];
+//判斷用戶是否有的權限
+function VerifyUsers (UserName, Value) {
+    let Users = UserLists [Value];
     for (let Value = 0; Value < Users ['length']; Value ++)
     if (UserName ['toUpperCase'] () === Users [Value] ['toUpperCase'] ())
     return true;
@@ -249,13 +262,13 @@ function Monitor (RoomID) {
         let User = Message ['info'] [2];
         let ParseMessage = Message ['info'] [1] ['split'] ('M-Keyword:');
         if (ParseMessage [0] === '$')
-        if (VerifyUsers (User [1])) {
+        if (VerifyUsers (User [1], 'KeywordUsers')) {
           for (let Key in UserLists ['Keywords'])
           if (ParseMessage [1] === Key)
             SendCMD (UserLists ['Keywords'] [Key]);
         } else
         SendToBL ('对不起，您沒有使用關鍵詞的權限', false);
-        if (!JudgeUsersExist (User [1], UserLists ['Blacklists']))
+        if (!JudgeUsersExist (User [1], UserLists ['BarrageBlacklists']))
         SendMTM (`§b(§3Mcbbsmis§b) §9Barrage §b[§c${User [1]}§b]§d: §6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
     });
     
@@ -265,7 +278,7 @@ function Monitor (RoomID) {
    
    
     	if (Configuration ['BiliBili'] ['RandomEvent'])
-    	if (GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Configuration ['BiliBili'] ['GiftQuantity']) {
+    	if (VerifyUsers (Message ['data'] ['uname'], 'GiftWhitelists') && GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Configuration ['BiliBili'] ['GiftQuantity']) {
     		let RandomEvent = UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])];
     	let RandomNumber = Math ['floor'] (Math ['random'] () * 255);
     	SendMTM  (`§b(§3Mcbbsmis§b) §9RandomEvents §b[§c${Message ['data'] ['uname']}§b]§d: §6因投喂 [§b${Message ['data'] ['giftName']} §6* §a${Message ['data'] ['num']}§6] 礼物触发事件为 §c[${RandomEvent ['Tips'] ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255)}]`);
@@ -306,23 +319,23 @@ new Ws ['Server'] (new Object ({
                 if (ParseConfigs [0] === '$') {
                     let ParseConfigM = ParseConfigs [1] ['split'] (' ');
                     switch (ParseConfigM [0]) {
-                        case 'Blacklists':
+                        case 'BarrageBlacklists':
                             switch (ParseConfigM [1]) {
                                 case 'Add':
-                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['Blacklists']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經在黑名單列表裡');
+                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['BarrageBlacklists']))
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經在彈幕黑名單列表裡');
                                     else {
-                                    UpdateBlacklists (ParseConfigM [2], 'Add');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已添加當前該用戶為黑名單')
+                                    UpdateBarrageBlacklists (ParseConfigM [2], 'Add');
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已添加當前該用戶為彈幕黑名單')
                                     }
                                 break;
                                     
                                 case 'Delete':
-                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['Blacklists']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶不在黑名單列表裡');
+                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['BarrageBlacklists']))
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶不在彈幕黑名單列表裡');
                                     else {
-                                    UpdateBlacklists (ParseConfigM [2], 'Delete');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為黑名單')
+                                    UpdateBarrageBlacklists (ParseConfigM [2], 'Delete');
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為彈幕黑名單')
                                     }
                             };
                         break;
@@ -348,6 +361,27 @@ new Ws ['Server'] (new Object ({
                             };
                         break;
                         
+                        case 'GiftWhitelists':
+                        	switch (ParseConfigM [1]) {
+                        		case 'Add':
+                        			if (JudgeUsersExist (ParseConfigM [2], UserLists ['GiftWhitelists']))
+                        			SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經是投餵禮物觸發事件使用者');
+                              else {
+                              	UpdateGiftWhitelists (ParseConfigM [2], 'Add');
+                              	SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已添加當前該用戶為投餵禮物觸發事件使用者')
+                                    };
+                                   break;
+                                   
+                        		case 'Delete':
+                        			if (!JudgeUsersExist (ParseConfigM [2], UserLists ['GiftWhitelists']))
+                        			SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經不是投餵禮物觸發事件使用者');
+                                    else {
+                                    UpdateGiftWhitelists (ParseConfigM [2], 'Delete');
+                                    SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為投餵禮物觸發使用者')
+                                    }
+                        	};
+                        	break;
+                        	
                             default:
                             SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在')
                     }
