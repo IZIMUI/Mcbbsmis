@@ -18,29 +18,30 @@
 * 2.添加了投喂指定数量的自定义礼物触发随机事件指令
 * 3.修复了一些部分报错内容
 * 4.修复了解析JSON报错问题
+* 5.刪除了所有命令語句的前綴
 </Br>
 
 ### 新命令
-* 1.添加彈幕黑名單: $B-Config:BarrageBlacklists Add 用戶名
-* 2.刪除彈幕黑名單: $B-Config:BarrageBlacklists Delete 用戶名
-* 3.添加關鍵詞使用者: $B-Config:KeywordUsers Add 用戶名
-* 4.刪除關鍵詞使用者: $B-Config:KeywordUsers Delete 用戶名
-* 5.添加投餵禮物觸發事件者: $B-Config:GiftWhitelists Add 用戶名
-* 6.刪除投餵禮物觸發事件者: $B-Config:GiftWhitelists Delete 用戶名
-* 7.發送關鍵詞命令: $M-Keyword:關鍵詞
-* 8.建築物本地生成命令: $O-Plugin:Building Local 建築物文件名
-* 9.建築物網絡生成命令: $O-Plugin:Building Online 建築物文件鏈接
-* 10.禮品袋隨機抽獎命令: $O-Plugin:Lottery
-* 11.定時器命令: $O-Plugin:Tte Time Commands
+* 1.添加彈幕黑名單: $Config:BarrageBlacklists Add 用戶名
+* 2.刪除彈幕黑名單: $Config:BarrageBlacklists Delete 用戶名
+* 3.添加關鍵詞使用者: $Config:KeywordUsers Add 用戶名
+* 4.刪除關鍵詞使用者: $Config:KeywordUsers Delete 用戶名
+* 5.添加投餵禮物觸發事件者: $Config:GiftWhitelists Add 用戶名
+* 6.刪除投餵禮物觸發事件者: $Config:GiftWhitelists Delete 用戶名
+* 7.發送關鍵詞命令: $Keyword:關鍵詞
+* 8.建築物本地生成命令: $Plugin:Building Local 建築物文件名
+* 9.建築物網絡生成命令: $Plugin:Building Online 建築物文件鏈接
+* 10.禮品袋隨機抽獎命令: $Plugin:Lottery
+* 11.定時器命令: $Plugin:Tte Time Commands
 </Br>
 
 ### 基本命令
-* 1.發送彈幕命令: $B-Send:消息
-* 2.設定用戶配置: $B-Config:選項
-* 3.發送關鍵詞命令: $M-Keyword:關鍵詞
-* 4.生成建築物命令: $O-Plugin:Building 選項
-* 5.禮品袋抽獎命令: $O-Plugin:Lottery
-* 6.定時命令: $O-Plugin:Tte Time Commands
+* 1.發送彈幕命令: $Send:消息
+* 2.設定用戶配置: $Config:選項
+* 3.發送關鍵詞命令: $Keyword:關鍵詞
+* 4.生成建築物命令: $Plugin:Building 選項
+* 5.禮品袋抽獎命令: $Plugin:Lottery
+* 6.定時命令: $Plugin:Tte Time Commands
 </Br>
 
 ## 項目目錄結構
@@ -71,7 +72,7 @@
 * 2.配置 [ServiceConfig.INI] 服務屬性值 ([配置教學傳送門](https://b23.tv/ymEtPO) 私聊我即可)。
 * 3.終端輸入 [node Mcbbsmis] 複製輸出消息 [請複製這個連接命令:] 下面的連接命令。
 * 4.進入 [Minecraft] 進入存檔 (前提: 必須打開作弊功能) 打開聊天欄粘貼連接命令回車。
-* 5.輸入發送彈幕命令 [$B-Send:消息]。
+* 5.輸入發送彈幕命令 [$Send:消息]。
 * 6.打開BiliBili並進入您的直播間查看彈幕即可。
 * 7.如有錯誤，請在Github上提出問題即可 [報告問題傳送門](https://github.com/lZiMUl/Mcbbsmis/issues)。
 * 8.教程完畢。

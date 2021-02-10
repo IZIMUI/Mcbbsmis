@@ -260,7 +260,7 @@ function Monitor (RoomID) {
     //彈幕監聽
     Live ['on'] ('DANMU_MSG', Message => {
         let User = Message ['info'] [2];
-        let ParseMessage = Message ['info'] [1] ['split'] ('M-Keyword:');
+        let ParseMessage = Message ['info'] [1] ['split'] ('Keyword:');
         if (ParseMessage [0] === '$')
         if (VerifyUsers (User [1], 'KeywordUsers')) {
           for (let Key in Interactives ['Keywords'])
@@ -309,9 +309,9 @@ new Ws ['Server'] (new Object ({
             let ParseData = JSON ['parse'] (new String (Data));
             if (Verify (ParseData)) {
                 //解析消息
-                let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('B-Send:');
-                let ParseConfigs = ParseData ['body'] ['properties'] ['Message'] ['split'] ('B-Config:');
-                let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('O-Plugin:');
+                let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Send:');
+                let ParseConfigs = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Config:');
+                let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugin:');
                 //判斷命令前綴
                 if (ParseMessage [0] === '$')
                 //將玩家聊天消息發送至BiliBili直播間
