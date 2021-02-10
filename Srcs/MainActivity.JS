@@ -260,7 +260,7 @@ function Monitor (RoomID) {
     //彈幕監聽
     Live ['on'] ('DANMU_MSG', Message => {
         let User = Message ['info'] [2];
-        let ParseMessage = Message ['info'] [1] ['split'] ('Keyword:');
+        let ParseMessage = Message ['info'] [1] ['split'] ('Keyword: ');
         if (ParseMessage [0] === '$')
         if (VerifyUsers (User [1], 'KeywordUsers')) {
           for (let Key in Interactives ['Keywords'])
@@ -280,7 +280,7 @@ function Monitor (RoomID) {
     	if (Configuration ['BiliBili'] ['RandomEvent'])
     	if (VerifyUsers (Message ['data'] ['uname'], 'GiftWhitelists') && GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Configuration ['BiliBili'] ['GiftQuantity']) {
     		let RandomEvent = Interactives ['RandomEvents'] [Math ['floor'] (Math ['random'] () * Interactives ['RandomEvents'] ['length'])];
-    	let RandomNumber = Math ['floor'] (Math ['random'] () * 255);
+    	let RandomNumber = Math ['floor'] (Math ['random'] () * 30);
     	SendMTM  (`§b(§3Mcbbsmis§b) §9RandomEvents §b[§c${Message ['data'] ['uname']}§b]§d: §6因投喂 [§b${Message ['data'] ['giftName']} §6* §a${Message ['data'] ['num']}§6] 礼物触发事件为 §c[${RandomEvent ['Tips'] ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255)}]`);
     	SendCMD (RandomEvent ['Command'] ['replace'] ('Player:XboxID', Configuration ['Minecraft'] ['XboxID']) ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255));
     	};
@@ -309,9 +309,9 @@ new Ws ['Server'] (new Object ({
             let ParseData = JSON ['parse'] (new String (Data));
             if (Verify (ParseData)) {
                 //解析消息
-                let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Send:');
-                let ParseConfigs = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Config:');
-                let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugin:');
+                let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Send: ');
+                let ParseConfigs = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Config: ');
+                let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugin: ');
                 //判斷命令前綴
                 if (ParseMessage [0] === '$')
                 //將玩家聊天消息發送至BiliBili直播間
@@ -336,7 +336,9 @@ new Ws ['Server'] (new Object ({
                                     else {
                                     UpdateBarrageBlacklists (ParseConfigM [2], 'Delete');
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為彈幕黑名單')
-                                    }
+                                    };
+                        default:
+                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在');
                             };
                         break;
                         
@@ -357,7 +359,9 @@ new Ws ['Server'] (new Object ({
                                     else {
                                     UpdateKeywordUsers (ParseConfigM [2], 'Delete');
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為關鍵詞使用者')
-                                    }
+                                    };
+                        default:
+                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在');
                             };
                         break;
                         
@@ -378,13 +382,16 @@ new Ws ['Server'] (new Object ({
                                     else {
                                     UpdateGiftWhitelists (ParseConfigM [2], 'Delete');
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為投餵禮物觸發使用者')
-                                    }
+                                    };
+                                    break;
+                         default:
+                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在');
                         	};
                         	break;
                         	
                             default:
                             SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在')
-                    }
+                    };
                 };
                 if (ParsePlugin [0] === '$') {
                     let ParsePlugins = ParsePlugin [1] ['split'] (' ');
@@ -398,6 +405,9 @@ new Ws ['Server'] (new Object ({
                                 case 'Online':
                                     new Bg (Socket, 'Online', ParsePlugins [2])
                                 break;
+                                
+                        default:
+                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該擴展插件屬性不存在');
                             };
                         break;
                         
@@ -415,7 +425,7 @@ new Ws ['Server'] (new Object ({
                          break;
                            
                         default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該擴展插件屬性不存在')
+                            SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該擴展插件屬性不存在');
                     }
                 }
             }

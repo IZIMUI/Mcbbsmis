@@ -11,7 +11,7 @@
         "email": "AA2908554069@gmail.com",
         "url": "https://b23.tv/ymEtPO"
     }],
-    "version": "18.17.72",
+    "version": "18.17.73",
     "license": "MIT",
     "homepage": "https://b23.tv/ymEtPO",
     "main": "./Srcs/MainActivity.JS",
@@ -19,24 +19,27 @@
         "OpenService": "cd .. && ls && node Mcbbsmis",
         "Building": "vim ./Configs/Building.JSON && cd ..",
         "Lottery": "vim ./Configs/Lottery.JSON && cd ..",
-        "ServiceConfig": "vim ./Configs/ServiceConfig.JSON && cd ..",
-        "UserLists": "vim ./Configs/UserLists.JSON && cd ..",
+        "ServiceConfig": "vim ./Configs/ServiceConfig.INI && cd ..",
+        "UserLists": "vim ./Configs/Interactives.JSON && cd ..",
         "Plugins": "pwd && ls Plugins/ && cd ..",
         "Structure": "ls && cd .."
     },
     "config": {
      "Help": {
-      "Send": "$B-Send:Message",
+      "Send": "$Send: Message",
       "Config": [{
-       "AddBlacklists": "$-Config:Blacklists Add UserName",
-       "DeleteBlacklists": "$-Config:Blacklists Delete UserName",
-       "AddCmdUsers": "$-Config:CmdUsers Add UserName",
-       "DeleteCmdUsers": "$-Config:CmdUsers Delete UserName"
+       "AddBarrageBlacklists": "$Config: BarrageBlacklists Add UserName",
+       "DeleteBarrageBlacklists": "$Config: BarrageBlacklists Delete UserName",
+       "AddKeywordUsers": "$Config: KeywordUsers Add UserName",
+       "DeleteKeywordUsers": "$Config: KeywordUsers Delete UserName",
+       "AddGiftWhitelists": "$Config: GiftWhitelists Add UserName",
+       "DeleteGiftWhitelists": "$Config: GiftWhitelists Delete UserName"
       }],
-      "Function": [{
-       "BuildLocal": "O-Function:Building Local Path",
-       "BuildingOnline": "O-Function:Building Online Url",
-       "Lottery": "O-Function:Lottery"
+      "Plugin": [{
+       "BuildLocal": "$Plugin: Building Local Path",
+       "BuildingOnline": "$Plugin: Building Online Url",
+       "Lottery": "$Plugin: Lottery",
+       "Tte": "$Plugin: Tte Time Command"
       }]
      }
     },
