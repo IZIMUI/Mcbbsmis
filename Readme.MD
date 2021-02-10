@@ -47,9 +47,9 @@
 * Mcbbsmis
     * Configs
         * Lottery.JSON
+        * Interactives.JSON
         * Building.JSON
         * ServiceConfig.INI
-        * UserLists.JSON
     * Logs
         * Successs
         * Errors

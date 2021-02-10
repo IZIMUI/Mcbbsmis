@@ -11,7 +11,7 @@
         "email": "AA2908554069@gmail.com",
         "url": "https://b23.tv/ymEtPO"
     }],
-    "version": "18.17.70",
+    "version": "18.17.71",
     "license": "MIT",
     "homepage": "https://b23.tv/ymEtPO",
     "main": "./Srcs/MainActivity.JS",
@@ -65,7 +65,7 @@
         "Building.JSON": "./Configs/Building.JSON",
         "Lottery.JSON": "./Configs/Lottery.JSON",
         "ServiceConfig.INI": "./Configs/ServiceConfig.INI",
-        "UserLists.JSON": "./Configs/UserLists.JSON",
+        "Interactives.JSON": "./Configs/Interactives.JSON",
         "Success.LOG": "./Logs/Successs/*.LOG",
         "Error.LOG": "./Logs/Errors/*.LOG",
         "Plugin": "./Plugins/*",

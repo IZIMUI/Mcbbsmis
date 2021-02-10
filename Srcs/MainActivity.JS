@@ -18,7 +18,7 @@ const Tte = new require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/T
 //基對象定義
 const ReadConfig = FileName => JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/', `${FileName}.JSON`))));
 const ServiceConfig = Ini ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/ServiceConfig.INI'))));
-const UserLists = JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/UserLists.JSON'))));
+const Interactives = JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/Interactives.JSON'))));
 
 var MonitorLock = false;
 var WebSocket = null;
@@ -114,16 +114,16 @@ function GiftName (Name) {
 
 //添加
 function Add (UserName, Key) {
-    UserLists [Key] ['push'] (UserName);
-    Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/UserLists.JSON'), JSON ['stringify'] (UserLists), () => null);
+    Interactives [Key] ['push'] (UserName);
+    Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/Interactives.JSON'), JSON ['stringify'] (Interactives), () => null);
 };
 
 //刪除
 function Delete (UserName, Key) {
-    let Point = UserLists [Key] ['indexOf'] (UserName);
+    let Point = Interactives [Key] ['indexOf'] (UserName);
     if (Point > -1)
-    UserLists [Key] ['splice'] (Point, 1);
-    Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/UserLists.JSON'), JSON ['stringify'] (UserLists), () => null)
+    Interactives [Key] ['splice'] (Point, 1);
+    Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/Interactives.JSON'), JSON ['stringify'] (Interactives), () => null)
 };
 
 //判斷用戶是否存在
@@ -185,7 +185,7 @@ function Verify (Data) {
 
 //判斷用戶是否有的權限
 function VerifyUsers (UserName, Value) {
-    let Users = UserLists [Value];
+    let Users = Interactives [Value];
     for (let Value = 0; Value < Users ['length']; Value ++)
     if (UserName ['toUpperCase'] () === Users [Value] ['toUpperCase'] ())
     return true;
@@ -263,12 +263,12 @@ function Monitor (RoomID) {
         let ParseMessage = Message ['info'] [1] ['split'] ('M-Keyword:');
         if (ParseMessage [0] === '$')
         if (VerifyUsers (User [1], 'KeywordUsers')) {
-          for (let Key in UserLists ['Keywords'])
+          for (let Key in Interactives ['Keywords'])
           if (ParseMessage [1] === Key)
-            SendCMD (UserLists ['Keywords'] [Key]);
+            SendCMD (Interactives ['Keywords'] [Key]);
         } else
         SendToBL ('对不起，您沒有使用關鍵詞的權限', false);
-        if (!JudgeUsersExist (User [1], UserLists ['BarrageBlacklists']))
+        if (!JudgeUsersExist (User [1], Interactives ['BarrageBlacklists']))
         SendMTM (`§b(§3Mcbbsmis§b) §9Barrage §b[§c${User [1]}§b]§d: §6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
     });
     
@@ -279,7 +279,7 @@ function Monitor (RoomID) {
    
     	if (Configuration ['BiliBili'] ['RandomEvent'])
     	if (VerifyUsers (Message ['data'] ['uname'], 'GiftWhitelists') && GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Configuration ['BiliBili'] ['GiftQuantity']) {
-    		let RandomEvent = UserLists ['RandomEvents'] [Math ['floor'] (Math ['random'] () * UserLists ['RandomEvents'] ['length'])];
+    		let RandomEvent = Interactives ['RandomEvents'] [Math ['floor'] (Math ['random'] () * Interactives ['RandomEvents'] ['length'])];
     	let RandomNumber = Math ['floor'] (Math ['random'] () * 255);
     	SendMTM  (`§b(§3Mcbbsmis§b) §9RandomEvents §b[§c${Message ['data'] ['uname']}§b]§d: §6因投喂 [§b${Message ['data'] ['giftName']} §6* §a${Message ['data'] ['num']}§6] 礼物触发事件为 §c[${RandomEvent ['Tips'] ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255)}]`);
     	SendCMD (RandomEvent ['Command'] ['replace'] ('Player:XboxID', Configuration ['Minecraft'] ['XboxID']) ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255));
@@ -322,7 +322,7 @@ new Ws ['Server'] (new Object ({
                         case 'BarrageBlacklists':
                             switch (ParseConfigM [1]) {
                                 case 'Add':
-                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['BarrageBlacklists']))
+                                    if (JudgeUsersExist (ParseConfigM [2], Interactives ['BarrageBlacklists']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經在彈幕黑名單列表裡');
                                     else {
                                     UpdateBarrageBlacklists (ParseConfigM [2], 'Add');
@@ -331,7 +331,7 @@ new Ws ['Server'] (new Object ({
                                 break;
                                     
                                 case 'Delete':
-                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['BarrageBlacklists']))
+                                    if (!JudgeUsersExist (ParseConfigM [2], Interactives ['BarrageBlacklists']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶不在彈幕黑名單列表裡');
                                     else {
                                     UpdateBarrageBlacklists (ParseConfigM [2], 'Delete');
@@ -343,7 +343,7 @@ new Ws ['Server'] (new Object ({
                         case 'KeywordUsers':
                             switch (ParseConfigM [1]) {
                                 case 'Add':
-                                    if (JudgeUsersExist (ParseConfigM [2], UserLists ['KeywordUsers']))
+                                    if (JudgeUsersExist (ParseConfigM [2], Interactives ['KeywordUsers']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經是關鍵詞使用者');
                                     else {
                                     UpdateKeywordUsers (ParseConfigM [2], 'Add');
@@ -352,7 +352,7 @@ new Ws ['Server'] (new Object ({
                                 break;
                                 
                                 case 'Delete':
-                                    if (!JudgeUsersExist (ParseConfigM [2], UserLists ['KeywordUsers']))
+                                    if (!JudgeUsersExist (ParseConfigM [2], Interactives ['KeywordUsers']))
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經不是關鍵詞使用者');
                                     else {
                                     UpdateKeywordUsers (ParseConfigM [2], 'Delete');
@@ -364,7 +364,7 @@ new Ws ['Server'] (new Object ({
                         case 'GiftWhitelists':
                         	switch (ParseConfigM [1]) {
                         		case 'Add':
-                        			if (JudgeUsersExist (ParseConfigM [2], UserLists ['GiftWhitelists']))
+                        			if (JudgeUsersExist (ParseConfigM [2], Interactives ['GiftWhitelists']))
                         			SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經是投餵禮物觸發事件使用者');
                               else {
                               	UpdateGiftWhitelists (ParseConfigM [2], 'Add');
@@ -373,7 +373,7 @@ new Ws ['Server'] (new Object ({
                                    break;
                                    
                         		case 'Delete':
-                        			if (!JudgeUsersExist (ParseConfigM [2], UserLists ['GiftWhitelists']))
+                        			if (!JudgeUsersExist (ParseConfigM [2], Interactives ['GiftWhitelists']))
                         			SendMTM ('§b(§3Mcbbsmis§b) §9Status §4當前該用戶已經不是投餵禮物觸發事件使用者');
                                     else {
                                     UpdateGiftWhitelists (ParseConfigM [2], 'Delete');
