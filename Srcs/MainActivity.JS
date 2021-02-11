@@ -337,6 +337,8 @@ new Ws ['Server'] (new Object ({
                                     UpdateBarrageBlacklists (ParseConfigM [2], 'Delete');
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為彈幕黑名單')
                                     };
+                        break;
+                        
                         default:
                             SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在');
                             };
@@ -360,6 +362,8 @@ new Ws ['Server'] (new Object ({
                                     UpdateKeywordUsers (ParseConfigM [2], 'Delete');
                                     SendMTM ('§b(§3Mcbbsmis§b) §9Status §a已刪除當前該用戶為關鍵詞使用者')
                                     };
+                        break;
+                        
                         default:
                             SendMTM ('§b(§3Mcbbsmis§b) §9Status §4該配置屬性不存在');
                             };
