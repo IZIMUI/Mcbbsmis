@@ -19,6 +19,7 @@
 * 3.修复了一些部分报错内容
 * 4.修复了解析JSON报错问题
 * 5.刪除了所有命令語句的前綴
+* 6.新增了三種新的命令
 </Br>
 
 ### 新命令
@@ -28,20 +29,22 @@
 * 4.刪除關鍵詞使用者: $Config: KeywordUsers Delete 用戶名
 * 5.添加投餵禮物觸發事件者: $Config: GiftWhitelists Add 用戶名
 * 6.刪除投餵禮物觸發事件者: $Config: GiftWhitelists Delete 用戶名
-* 7.發送關鍵詞命令: $Keyword:關鍵詞
-* 8.建築物本地生成命令: $Plugin: Building Local 建築物文件名
-* 9.建築物網絡生成命令: $Plugin: Building Online 建築物文件鏈接
-* 10.禮品袋隨機抽獎命令: $Plugin: Lottery
-* 11.定時器命令: $Plugin: Tte Time Commands
+* 7.開啟投餵禮物觸發隨機事件狀態: $Config: GiftStatus (True & False)
+* 8.添加投餵禮物觸發因素: $Config: GiftGroup Add GiftName
+* 9.刪除投餵禮物觸發因素: $Config: GiftGroup Delete GiftName
+* 10.設定投餵禮物觸發數量: GiftQuantity Value
+* 11.發送關鍵詞命令: $Keyword:關鍵詞
+* 12.建築物本地生成命令: $Plugin: Building Local 建築物文件名
+* 13.建築物網絡生成命令: $Plugin: Building Online 建築物文件鏈接
+* 14.禮品袋隨機抽獎命令: $Plugin: Lottery
+* 15.定時器命令: $Plugin: Tte Time Commands
 </Br>
 
 ### 基本命令
 * 1.發送彈幕命令: $Send: 消息
-* 2.設定用戶配置: $Config: 選項
-* 3.發送關鍵詞命令: $Keyword: 關鍵詞
-* 4.生成建築物命令: $Plugin: Building 選項
-* 5.禮品袋抽獎命令: $Plugin: Lottery
-* 6.定時命令: $Plugin: Tte Time Commands
+* 2.設定配置命令: $Config: 選項
+* 3.關鍵詞語命令: $Keyword: 關鍵詞
+* 4.公開插件命令: $Plugin: 選項
 </Br>
 
 ## 項目目錄結構
