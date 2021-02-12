@@ -68,7 +68,7 @@ function SendMTM (Message) {
             "origin": {
                 "type": "player"
             },
-            "commandLine": `say §o§l${Message}`,
+            "commandLine": `say §l§o§o§l§o§l${Message}`,
             "version": 1
         }
     })))
@@ -96,7 +96,7 @@ function SendCMD (Command) {
 //獲取隨機禮品
 function GetLottery (Name) {
     new Lottery (ReadConfig (Name)) ['then'] (async Resource => {
-        SendMTM (`§b(§3Mcbbsmis§b) §9Lottery §5恭喜 §b[§c${Configuration ['Minecraft'] ['XboxID']}§b] §5在 §6${Resource ['Title']} §5禮品中獲得 §6${Resource ['Data'] ['Quantity']} §5個 §6${Resource ['Data'] ['Title']}`);
+        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Lottery §l§o§5恭喜 §l§o§b[§l§o§c${Configuration ['Minecraft'] ['XboxID']}§l§o§b] §l§o§5在 §l§o§6${Resource ['Title']} §l§o§5禮品中獲得 §l§o§6${Resource ['Data'] ['Quantity']} §l§o§5個 §l§o§6${Resource ['Data'] ['Title']}`);
         SendCMD (`Give ${Configuration ['Minecraft'] ['XboxID']} ${Resource ['Data'] ['Id']} ${Resource ['Data'] ['Quantity']}`)
     });
 }
@@ -183,19 +183,19 @@ function GiftConfigs (Event, Value, Values) {
 			switch (Value) {
 				case 'Add':
 					if (JudgeUsersExist (Values, Interactives ['GiftGroup']))
-					SendMTM ('§b(§3Mcbbsmis§b) §9GiftStatus §4無法添加 該禮物已經是觸發因素');
+					SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§4無法添加 該禮物已經是觸發因素');
 					else {
-						SendMTM (`§b(§3Mcbbsmis§b) §9GiftStatus §a已添加 §b[${Values}] §a為觸發禮物`);
+						SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§a已添加 §l§o§b[${Values}] §l§o§a為觸發禮物`);
 						Add (Values, 'GiftGroup');
 					}
 				break;
 					
 				case 'Delete':
 					if (!JudgeUsersExist (Values, Interactives ['GiftGroup']))
-					SendMTM ('§b(§3Mcbbsmis§b) §9GiftStatus §4無法刪除 該禮物已經不是觸發因素');
+					SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§4無法刪除 該禮物已經不是觸發因素');
 					else {
 						Delete (Values, 'GiftGroup');
-						SendMTM (`§b(§3Mcbbsmis§b) §9GiftStatus §a已刪除 §b[${Values}] §a為觸發禮物`)
+						SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§a已刪除 §l§o§b[${Values}] §l§o§a為觸發禮物`)
 					}
 				break;
 			};
@@ -268,13 +268,13 @@ function SendToBL (Message, Rcs) {
         let Status = JSON ['parse'] (Message);
         if (Rcs)
         if (Status ['code'] === 0 && Status ['message'] === '')
-        SendMTM ('§b(§3Mcbbsmis§b) §9BarrageStatus §a發送成功');
+        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§a發送成功');
         else if (Status ['code'] === 0 && Status ['message'] === '非法内容')
-        SendMTM ('§b(§3Mcbbsmis§b) §9BarrageStatus §4非法內容');
+        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§4非法內容');
         else if (Status ['code'] === -500)
-        SendMTM ('§b(§3Mcbbsmis§b) §9BarrageStatus §4內容過長');
+        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§4內容過長');
         else
-        SendMTM (`§b(§3Mcbbsmis§b) §9BarrageStatus §4${JSON ['stringify'] (Status)}`)
+        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§4${JSON ['stringify'] (Status)}`)
     })
 }
 );
@@ -289,7 +289,7 @@ function Monitor (RoomID) {
     const Live = new LiveTCP (RoomID);
     //觀眾進入監聽
     Live ['on'] ('WELCOME', Message => {
-    	SendMTM (`§b(§3Mcbbsmis§b) §9Welcome §5熱烈歡迎 §b[§c${Message ['data'] ['uname']}§b] §5進入了直播間`);
+    	SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Welcome §l§o§5熱烈歡迎 §l§o§b[§l§o§c${Message ['data'] ['uname']}§l§o§b] §l§o§5進入了直播間`);
     });
     
     //彈幕監聽
@@ -304,23 +304,23 @@ function Monitor (RoomID) {
         } else
         SendToBL ('对不起，您沒有使用關鍵詞的權限', false);
         if (!JudgeUsersExist (User [1], Interactives ['BarrageBlacklists']))
-        SendMTM (`§b(§3Mcbbsmis§b) §9Barrage §b[§c${User [1]}§b]§d: §6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
+        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Barrage §l§o§b[§l§o§c${User [1]}§l§o§b]§l§o§d: §l§o§6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
     });
     
     //禮物監聽
     Live ['on'] ('SEND_GIFT', Message => {
-    	SendMTM (`§b(§3Mcbbsmis§b) §9Gift §b[§c${Message ['data'] ['uname']}§b]§d: §6${Message ['data'] ['action']}了 §b${Message ['data'] ['giftName']} §6* §a${Message ['data'] ['num']}`);
+    	SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Gift §l§o§b[§l§o§c${Message ['data'] ['uname']}§l§o§b]§l§o§d: §l§o§6${Message ['data'] ['action']}了 §l§o§b${Message ['data'] ['giftName']} §l§o§6* §l§o§a${Message ['data'] ['num']}`);
    
    
-    	if (Interactives ['RandomEventStatus'] || false)
+    	if (Interactives ['GiftStatus'] || false)
     	if (VerifyUsers (Message ['data'] ['uname'], 'GiftWhitelists') && GiftName (Message ['data'] ['giftName']) && new Number (Message ['data'] ['num']) >= Interactives ['GiftQuantity']) {
     		let RandomEvent = Interactives ['RandomEvents'] [Math ['floor'] (Math ['random'] () * Interactives ['RandomEvents'] ['length'])];
     	let RandomNumber = Math ['floor'] (Math ['random'] () * 30);
-    	SendMTM  (`§b(§3Mcbbsmis§b) §9RandomEvents §b[§c${Message ['data'] ['uname']}§b]§d: §6因投喂 [§b${Message ['data'] ['giftName']} §6* §a${Message ['data'] ['num']}§6] 礼物触发事件为 §c[${RandomEvent ['Tips'] ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255)}]`);
+    	SendMTM  (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9RandomEvents §l§o§b[§l§o§c${Message ['data'] ['uname']}§l§o§b]§l§o§d: §l§o§6因投喂 [§l§o§b${Message ['data'] ['giftName']} §l§o§6* §l§o§a${Message ['data'] ['num']}§l§o§6] 礼物触发事件为 §l§o§c[${RandomEvent ['Tips'] ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255)}]`);
     	SendCMD (RandomEvent ['Command'] ['replace'] ('Player:XboxID', Configuration ['Minecraft'] ['XboxID']) ['replace'] (new RegExp ('Number:Random', 'img'), RandomNumber) ['replace'] (new RegExp ('Number:Gift', 'img'), Message ['data'] ['num'] < 25? Message ['data'] ['num'] * 10: 255));
     	};
     });
-    SendMTM ('§b(§3Mcbbsmis§b) §9ConnectStatus §a連接成功 正在監聽直播間彈幕');
+    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConnectStatus §l§o§a連接成功 正在監聽直播間彈幕');
 };
 
 //開啟WebSocket服務器
@@ -335,7 +335,7 @@ new Ws ['Server'] (new Object ({
     Monitor (JSON ['parse'] (new Number (Configuration ['BiliBili'] ['RoomID'])));
     MonitorLock = true
     } else
-    SendMTM ('§b(§3Mcbbsmis§b) §9ConnectStatus §a連接成功 正在監聽直播間彈幕');
+    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConnectStatus §l§o§a連接成功 正在監聽直播間彈幕');
     //向遊戲客戶端發送請求訂閱事件
     Subscribe (Socket, ['PlayerMessage']);
     //監聽玩家聊天欄消息數據並返回消息進行語句判斷
@@ -358,24 +358,24 @@ new Ws ['Server'] (new Object ({
                             switch (ParseConfigM [1]) {
                                 case 'Add':
                                     if (JudgeUsersExist (ParseConfigM [2], Interactives ['BarrageBlacklists']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4當前該用戶已經在彈幕黑名單列表裡');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4當前該用戶已經在彈幕黑名單列表裡');
                                     else {
                                     UpdateBarrageBlacklists (ParseConfigM [2], 'Add');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §a已添加當前該用戶為彈幕黑名單');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§a已添加當前該用戶為彈幕黑名單');
                                     }
                                 break;
                                     
                                 case 'Delete':
                                     if (!JudgeUsersExist (ParseConfigM [2], Interactives ['BarrageBlacklists']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4當前該用戶不在彈幕黑名單列表裡');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4當前該用戶不在彈幕黑名單列表裡');
                                     else {
                                     UpdateBarrageBlacklists (ParseConfigM [2], 'Delete');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §a已刪除當前該用戶為彈幕黑名單');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§a已刪除當前該用戶為彈幕黑名單');
                                     };
                         break;
                         
                         default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4該配置屬性不存在');
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4該配置屬性不存在');
                             };
                         break;
                         
@@ -383,24 +383,24 @@ new Ws ['Server'] (new Object ({
                             switch (ParseConfigM [1]) {
                                 case 'Add':
                                     if (JudgeUsersExist (ParseConfigM [2], Interactives ['KeywordUsers']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4當前該用戶已經是關鍵詞使用者');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4當前該用戶已經是關鍵詞使用者');
                                     else {
                                     UpdateKeywordUsers (ParseConfigM [2], 'Add');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §a已添加當前該用戶為關鍵詞使用者');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§a已添加當前該用戶為關鍵詞使用者');
                                     }
                                 break;
                                 
                                 case 'Delete':
                                     if (!JudgeUsersExist (ParseConfigM [2], Interactives ['KeywordUsers']))
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4當前該用戶已經不是關鍵詞使用者');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4當前該用戶已經不是關鍵詞使用者');
                                     else {
                                     UpdateKeywordUsers (ParseConfigM [2], 'Delete');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §a已刪除當前該用戶為關鍵詞使用者');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§a已刪除當前該用戶為關鍵詞使用者');
                                     };
                         break;
                         
                         default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4該配置屬性不存在');
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4該配置屬性不存在');
                             };
                         break;
                         
@@ -408,23 +408,23 @@ new Ws ['Server'] (new Object ({
                         	switch (ParseConfigM [1]) {
                         		case 'Add':
                         			if (JudgeUsersExist (ParseConfigM [2], Interactives ['GiftWhitelists']))
-                        			SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4當前該用戶已經是投餵禮物觸發事件使用者');
+                        			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4當前該用戶已經是投餵禮物觸發事件使用者');
                               else {
                               	UpdateGiftWhitelists (ParseConfigM [2], 'Add');
-                              	SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §a已添加當前該用戶為投餵禮物觸發事件使用者');
+                              	SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§a已添加當前該用戶為投餵禮物觸發事件使用者');
                                     };
                                    break;
                                    
                         		case 'Delete':
                         			if (!JudgeUsersExist (ParseConfigM [2], Interactives ['GiftWhitelists']))
-                        			SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4當前該用戶已經不是投餵禮物觸發事件使用者');
+                        			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4當前該用戶已經不是投餵禮物觸發事件使用者');
                                     else {
                                     UpdateGiftWhitelists (ParseConfigM [2], 'Delete');
-                                    SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §a已刪除當前該用戶為投餵禮物觸發使用者');
+                                    SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§a已刪除當前該用戶為投餵禮物觸發使用者');
                                     };
                                     break;
                          default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4該配置屬性不存在');
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4該配置屬性不存在');
                         	};
                         	break;
                         	
@@ -432,16 +432,16 @@ new Ws ['Server'] (new Object ({
                         		switch (ParseConfigM [1]) {
                         		case 'True':
                         			GiftConfigs ('GiftStatus', 'True');
-                        			SendMTM ('§b(§3Mcbbsmis§b) §9GiftStatus §a已更改禮物觸發狀態為 [True]');
+                        			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§c已更改禮物觸發狀態為 §l§o§a[True]');
                               break;
                                    
                         		case 'False':
                         			GiftConfigs ('GiftStatus', 'False');
-                        			SendMTM ('§b(§3Mcbbsmis§b) §9GiftStatus §4已更改禮物觸發狀態為 [False]')
+                        			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§c已更改禮物觸發狀態為 §l§o§4[False]')
                               break;
                               
                          default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4該配置屬性不存在');
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4該配置屬性不存在');
                         	};
                         	break;
                         	
@@ -456,17 +456,20 @@ new Ws ['Server'] (new Object ({
                                break;
                                
                          default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4該配置屬性不存在');
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4該配置屬性不存在');
                         	};
                         	break;
                         	
                         	case 'GiftQuantity':
+                        		if (new RegExp ('[0-9]', 'img') ['test'] (new Number (ParseConfigM [1]))) {
                         		GiftConfigs ('GiftQuantity', ParseConfigM [1]);
-                        		SendMTM (`§b(§3Mcbbsmis§b) §9GiftStatus §a已更改禮物觸發數量為 [${ParseConfigM [1]}]`)
+                        		SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§a已更改禮物觸發數量為 §l§o§c[${ParseConfigM [1]}]`);
+                        		} else
+                        		SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§4非法字符 請輸入正確的數值`);
                         	break;
                         	
                             default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9ConfigStatus §4該配置屬性不存在')
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConfigStatus §l§o§4該配置屬性不存在')
                     };
                 };
                 if (ParsePlugin [0] === '$') {
@@ -483,7 +486,7 @@ new Ws ['Server'] (new Object ({
                                 break;
                                 
                         default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9PluginStatus §4該擴展插件屬性不存在');
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9PluginStatus §l§o§4該擴展插件屬性不存在');
                             };
                         break;
                         
@@ -494,14 +497,14 @@ new Ws ['Server'] (new Object ({
                         case 'Tte':
                         	if (ParsePlugin [1] ['indexOf'] ('#')) {
                            Tte ['SetTimerListener'] (ParsePlugins [1], ParsePlugin [1] ['substring'] (ParsePlugin ['indexOf'] ('#'), ParsePlugin ['lastIndexOf'] ('#')))
-                           SendMTM ('§b(§3Mcbbsmis§b) §9Status §a定時命令設置成功')
+                           SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Status §l§o§a定時命令設置成功')
                         	}
                         else
-                          SendMTM ('§b(§3Mcbbsmis§b) §9Status §4定時命令設置失敗')
+                          SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Status §l§o§4定時命令設置失敗')
                          break;
                            
                         default:
-                            SendMTM ('§b(§3Mcbbsmis§b) §9PluginStatus §4該擴展插件屬性不存在');
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9PluginStatus §l§o§4該擴展插件屬性不存在');
                     }
                 }
             }
