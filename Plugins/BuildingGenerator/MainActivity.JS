@@ -16,7 +16,7 @@ function SendMSM (Socket, Message) {
             "origin": {
                 "type": "player"
             },
-            "commandLine": `say §o§l§b(§3Mcbbsmis§b) §9Building ${Message}`,
+            "commandLine": `say §o§l§b(§3Mcbbsmis§b) §9Building §e${Message}`,
             "version": 1
         }
     })))
@@ -95,12 +95,14 @@ function Deep (Socket, Data) {
 
 function Local (Socket, Name) {
     let BuildBuffer = new Array;
-    let BuildPath = Path ['join'] (Path ['resolve'] (), `Mcbbsmis/Config/${Name}.JSON`);
+    let BuildPath = Path ['join'] (Path ['resolve'] (), `Mcbbsmis/Configs/Buildings/${Name}.JSON`);
+    try {
     let BuildData = Fs ['createReadStream'] (BuildPath);
     BuildData ['on'] ('data', Buffer => BuildBuffer ['push'] (new String (Buffer)));
     BuildData ['on'] ('end', () => {
         Deep (Socket, BuildBuffer)
     })
+    } catch (E) {}
 }
 function Online (Socket, Url) {
     let BuildBuffer = new Array;
