@@ -4,8 +4,8 @@ const Fs = require ('fs');
 const Path = require ('path');
 const Http = require ('http');
 
-function SendMSM (Socket, Message) {
-    Socket ['send'] (JSON ['stringify'] (new Object ({
+function SendMSM (Socket, Message, Mode) {
+    Socket ['send'] (JSON ['stringify'] (!Mode? new Object ({
         "header":{
             "messagePurpose": "commandRequest",
             "messageType": "commandRequest",
@@ -19,25 +19,45 @@ function SendMSM (Socket, Message) {
             "commandLine": `say §o§l§b(§3Mcbbsmis§b) §9Building §e${Message}`,
             "version": 1
         }
+    }): new Object ({
+        "header":{
+            "messagePurpose": "commandRequest",
+            "messageType": "commandRequest",
+            "requestId":"c3014476-21b7-41f6-85d8-c964870a2444",
+            "version": 1
+        },
+        "body": {
+            "origin": {
+                "type": "player"
+            },
+            "commandLine": `Title @s Actionbar §o§l§b(§3Mcbbsmis§b) §9Building §e${Message}`,
+            "version": 1
+        }
     })))
 };
 
 function Deep (Socket, Data) {
     let Resource = new Array;
     let ParseBuild = JSON ['parse'] (Data ['join'] (''));
-    Resource ['push'] (`建築物名稱: ${ParseBuild ['Headers'] ['Name']}`);
-    Resource ['push'] (`建築物描述: ${ParseBuild ['Headers'] ['Description']}`);
-    Resource ['push'] (`建築物成員: ${function (Contributors, Combination) {
+    Resource ['push'] (`建築物名稱§d:§c ${ParseBuild ['Headers'] ['Name']}`);
+    Resource ['push'] (`建築物描述§d:§c ${ParseBuild ['Headers'] ['Description']}`);
+    Resource ['push'] (`建築物成員§d:§c ${function (Contributors, Combination) {
     Contributors ['forEach'] (Value => {
-    Combination ['push'] (`${Value ['Name']} (${Value ['Position']})`)});
+    Combination ['push'] (`${Value ['Name']} (${Value ['Position']} # ${Value ['Mail']})`)});
     return Combination ['join'] (' | ');
     } (ParseBuild ['Headers'] ['Contributors'], new Array)}`);
-        Resource ['push'] (`建築物團隊: ${ParseBuild ['Headers'] ['Team'] ['Name']}`);
-        Resource ['push'] (`建築物類型: ${ParseBuild ['Headers'] ['Type']}`);
-        Resource ['push'] (`建築物大小: ${ParseBuild ['Bodyers'] ['Blocks'] ['length'] + ParseBuild ['Bodyers'] ['Entitys'] ['length']} Bytes`);
-        Resource ['push'] (`建築物唯碼: ${ParseBuild ['Headers'] ['Uuid']}`);
-        Resource ['push'] (`建築物許可: ${ParseBuild ['Headers'] ['Certification'] ['PublicKey']}`);
-        Resource ['forEach'] (Value => SendMSM (Socket, Value));
+        Resource ['push'] (`建築物團隊§d:§c ${ParseBuild ['Headers'] ['Team'] ['Name']}`);
+        Resource ['push'] (`建築物郵箱§d:§c ${ParseBuild ['Headers'] ['Team'] ['Mail']}`);
+        Resource ['push'] (`建築物主頁§d:§c ${ParseBuild ['Headers'] ['Team'] ['Homepage']}`);
+        Resource ['push'] (`建築物類型§d:§c ${ParseBuild ['Headers'] ['Type']}`);
+        Resource ['push'] (`建築物大小§d:§c ${ParseBuild ['Bodyers'] ['Blocks'] ['length'] + ParseBuild ['Bodyers'] ['Entitys'] ['length']} Bytes`);
+        Resource ['push'] (`建築物唯碼§d:§c ${ParseBuild ['Headers'] ['Uuid']}`);
+        Resource ['push'] (`建築物許可§d:§c ${ParseBuild ['Headers'] ['Certification'] ['License']}`);
+        Resource ['push'] (`建築物公鑰§d:§c ${ParseBuild ['Headers'] ['Certification'] ['PublicKey']}`);
+        Resource ['forEach'] (Value => SendMSM (Socket, Value, false));
+        let Schedule = setInterval (Data => {
+        	SendMSM (Socket, '正在生成中，請稍等...', true)
+        }, 1000)
         ParseBuild ['Bodyers'] ['Commands'] ['forEach'](Value => {
             Socket ['send'] (JSON ['stringify'] (new Object ({
                 "header":{
@@ -54,7 +74,7 @@ function Deep (Socket, Data) {
                     "version": 1
                 }
             })));
-            SendMSM (Socket, Value ['Tips'])
+            SendMSM (Socket, Value ['Tips'], false)
         });
         ParseBuild ['Bodyers'] ['Blocks'] ['forEach'](Value => {
             Socket ['send'] (JSON ['stringify'] (new Object ({
@@ -90,7 +110,8 @@ function Deep (Socket, Data) {
                 }
             })));
         });
-        SendMSM (Socket, '生成完畢')
+        clearInterval (Schedule);
+        SendMSM (Socket, `【${ParseBuild ['Headers'] ['Name']}】建築物生成完畢`, false);
 };
 
 function Local (Socket, Name) {

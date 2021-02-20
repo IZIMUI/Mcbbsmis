@@ -14,6 +14,10 @@ const {LiveTCP} = require ('bilibili-live-ws');
 const Bg = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/BuildingGenerator/MainActivity.JS'));
 const Lottery = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/Lottery/MainActivity.JS'));
 const Tte = new require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/TimerTriggerEvent/MainActivity.JS'));
+const Vm = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/VideoMedio/MainActivity.JS'));;
+const Am = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/AudioMedio/MainActivity.JS'));;;
+const Ps = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/PointSong/MainActivity.JS'));;
+
 
 //基對象定義
 const ReadConfig = FileName => JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/', `${FileName}.JSON`))));
@@ -268,13 +272,13 @@ function SendToBL (Message, Rcs) {
         let Status = JSON ['parse'] (Message);
         if (Rcs)
         if (Status ['code'] === 0 && Status ['message'] === '')
-        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§a發送成功');
+        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9SendStatus §l§o§a發送成功');
         else if (Status ['code'] === 0 && Status ['message'] === '非法内容')
-        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§4非法內容');
+        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9SnedStatus §l§o§4非法內容');
         else if (Status ['code'] === -500)
-        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§4內容過長');
+        SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9SendStatus §l§o§4內容過長');
         else
-        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9BarrageStatus §l§o§4${JSON ['stringify'] (Status)}`)
+        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9SendStatus §l§o§4${JSON ['stringify'] (Status)}`)
     })
 }
 );
@@ -304,7 +308,7 @@ function Monitor (RoomID) {
         } else
         SendToBL ('对不起，您沒有使用關鍵詞的權限', false);
         if (!JudgeUsersExist (User [1], Interactives ['BarrageBlacklists']))
-        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Barrage §l§o§b[§l§o§c${User [1]}§l§o§b]§l§o§d: §l§o§6${Message ['info'] [1] ['replace'] (new RegExp ('@a|@e|@s|@r', 'img'), '')}`);
+        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Barrage §l§o§b[§l§o§c${User [1]}§l§o§b]§l§o§d: §l§o§6${Message ['info'] [1] ['replace'] (new RegExp ('@e', 'img'), '')}`);
     });
     
     //禮物監聽

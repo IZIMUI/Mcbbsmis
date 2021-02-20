@@ -53,16 +53,10 @@
     * Configs
         * Lottery.JSON
         * Interactives.JSON
-        * Building.JSON
         * ServiceConfig.INI
     * Logs
         * Successs
         * Errors
-    * Plugins
-        * BuildingGenerator
-            * MainActivity.JS
-        * Lottery
-            * MainActivity.JS
     * Srcs
         * MainActivity.JS
     * License
@@ -83,8 +77,9 @@
 </Br>
 
 ## 特別鳴謝測試人員名單
-* 1.[骥哥Jige](https://b23.tv/lPZ0gr)
-* 2.[教科书式帕琪](https://b23.tv/rTsY3K)
-* 3.[-星陌雪-](https://b23.tv/t7T9y9)
+* 1.【[骥翼志](https://b23.tv/lPZ0gr)】
+* 2.【[教科书式帕琪](https://b23.tv/rTsY3K)】
+* 3.【[-星陌雪-](https://b23.tv/t7T9y9)】
+* 4.【[F小冷](https://b23.tv/ukCYSs)】
 #### 期待您的加入測試
 </Br>
