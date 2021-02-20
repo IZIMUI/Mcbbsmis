@@ -14,16 +14,18 @@ const {LiveTCP} = require ('bilibili-live-ws');
 const Bg = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/BuildingGenerator/MainActivity.JS'));
 const Lottery = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/Lottery/MainActivity.JS'));
 const Tte = new require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/TimerTriggerEvent/MainActivity.JS'));
-const Vm = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/VideoMedio/MainActivity.JS'));;
-const Am = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/AudioMedio/MainActivity.JS'));;;
-const Ps = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/PointSong/MainActivity.JS'));;
-
+const Vm = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/VideoMedio/MainActivity.JS'));
+const Am = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/AudioMedio/MainActivity.JS'));
+const Ps = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/PointSong/MainActivity.JS'));
+const Gm = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/GoHome/MainActivity.JS'));
 
 //基對象定義
 const ReadConfig = FileName => JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/', `${FileName}.JSON`))));
 const ServiceConfig = Ini ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/ServiceConfig.INI'))));
 const Interactives = JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/Interactives.JSON'))));
 
+const GoHome = new Gm;
+const Coordinate = new Array;
 var MonitorLock = false;
 var WebSocket = null;
 
@@ -341,17 +343,20 @@ new Ws ['Server'] (new Object ({
     } else
     SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConnectStatus §l§o§a連接成功 正在監聽直播間彈幕');
     //向遊戲客戶端發送請求訂閱事件
-    Subscribe (Socket, ['PlayerMessage']);
+    Subscribe (Socket, new Array ('PlayerMessage', 'PlayerTransform', 'AgentCreated'));
     //監聽玩家聊天欄消息數據並返回消息進行語句判斷
     Socket ['on'] ('message', Data => {
         try {
             let ParseData = JSON ['parse'] (new String (Data));
             if (Verify (ParseData)) {
                 //解析消息
+                let ParseHelp = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Help');
                 let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Send: ');
                 let ParseConfig = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Config: ');
                 let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugin: ');
                 //判斷命令前綴
+                if (ParseHelp === '$')
+                SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Helper §l§o§4無法幫助，懶得寫，去Github查看命令，以後肯定會寫上的。');
                 if (ParseMessage [0] === '$')
                 //將玩家聊天消息發送至BiliBili直播間
                 SendToBL (ParseMessage [1], true)
@@ -504,13 +509,48 @@ new Ws ['Server'] (new Object ({
                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Status §l§o§a定時命令設置成功')
                         	}
                         else
-                          SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Status §l§o§4定時命令設置失敗')
+                          SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Status §l§o§4定時命令設置失敗');
                          break;
-                           
+                        
+                        case 'Agent':
+                        	switch (ParsePlugins [1]) {
+                        		case 'Create':
+                        			SendCMD ('/agent create');
+                        	};
+                        break;
+                        
+                        case 'GoHome':
+                        	switch (ParsePlugins [1]) {
+                        		case 'Set':
+                        			GoHome ['setHome'] (Coordinate);
+                        			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GoHomeStatus §l§o§a傳送點設置成功');
+                        		break;
+                        		
+                        		case 'Get':
+                        			let Gms = GoHome ['getHome'] ();
+                        			if (Gms === null)
+                        			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GoHomeStatus §l§o§4你不先設置傳送點，你想回哪去?');
+                        			else {
+                        			SendCMD (Gms);
+                        			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GoHomeStatus §l§o§a傳送成功');
+                        			}
+                        		break;
+                        		
+                        		default:
+                        		SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9PluginStatus §l§o§4該擴展插件屬性不存在');
+                        	};
+                        break;
+                        
                         default:
                             SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9PluginStatus §l§o§4該擴展插件屬性不存在');
                     }
                 }
+            } else if (ParseData ['body'] ['eventName'] === 'PlayerTransform') {
+            Coordinate [0] = parseInt (ParseData ['body'] ['properties'] ['PosX']) || 0;
+            Coordinate [1] = parseInt (ParseData ['body'] ['properties'] ['PosY']) || 90;
+            Coordinate [2] = parseInt (ParseData ['body'] ['properties'] ['PosZ']) || 0;
+            } else if (ParseData ['body'] ['eventName'] === 'AgentCreated') {
+              SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9AgentStatus §l§o§a 【Minecraft】Agent 吉祥物召喚成功');
             }
         } catch (Err) {
             Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Logs/Errors/', `${new String (Math ['random'] () * 9329583).LOG}`), new String (Err))

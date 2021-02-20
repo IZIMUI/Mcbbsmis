@@ -33,19 +33,27 @@
 * 7.開啟投餵禮物觸發隨機事件狀態: $Config: GiftStatus (True & False)
 * 8.添加投餵禮物觸發因素: $Config: GiftGroup Add GiftName
 * 9.刪除投餵禮物觸發因素: $Config: GiftGroup Delete GiftName
-* 10.設定投餵禮物觸發數量: GiftQuantity Value
+* 10.設定投餵禮物觸發數量: $Config: GiftQuantity Value
 * 11.發送關鍵詞命令: $Keyword:關鍵詞
 * 12.建築物本地生成命令: $Plugin: Building Local 建築物文件名
 * 13.建築物網絡生成命令: $Plugin: Building Online 建築物文件鏈接
 * 14.禮品袋隨機抽獎命令: $Plugin: Lottery
-* 15.定時器命令: $Plugin: Tte Time Commands
+* 15.定時器命令: $Plugin: Tte Time Commands (暫時失效)
+* 16.創建吉祥物 Agent: $Plugin: Agent Create
+* 17.設置坐標點: $Plugin: GoHome Set
+* 18.傳送坐標點: $Plugin: GoHome Get
+* 19.幫助: $Help
+* 20.音頻播放器: $Plugin: AudioMedio (Local & Online) (Path & Url) (未來命令)
+* 21.視頻播放器: $Plugin: VideoMedio (Local & Online) (Path & Url) (未來命令)
+* 22.點歌系統框架: $Plugin: PointSong SongName (未來命令)
 </Br>
 
 ### 基本命令
-* 1.發送彈幕命令: $Send: 消息
-* 2.設定配置命令: $Config: 選項
-* 3.關鍵詞語命令: $Keyword: 關鍵詞
-* 4.公開插件命令: $Plugin: 選項
+* 1.幫助助手命令: $Help
+* 2.發送彈幕命令: $Send: 消息
+* 3.設定配置命令: $Config: 選項
+* 4.關鍵詞語命令: $Keyword: 關鍵詞
+* 5.公開插件命令: $Plugin: 選項
 </Br>
 
 ## 項目目錄結構
