@@ -26,6 +26,7 @@ const Interactives = JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['joi
 
 const GoHome = new Gm;
 const Coordinate = new Array;
+var AgentStatus = false;
 var MonitorLock = false;
 var WebSocket = null;
 
@@ -343,7 +344,7 @@ new Ws ['Server'] (new Object ({
     } else
     SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConnectStatus §l§o§a連接成功 正在監聽直播間彈幕');
     //向遊戲客戶端發送請求訂閱事件
-    Subscribe (Socket, new Array ('PlayerMessage', 'PlayerTransform', 'AgentCreated'));
+    Subscribe (Socket, new Array ('PlayerMessage', 'PlayerTransform'));
     //監聽玩家聊天欄消息數據並返回消息進行語句判斷
     Socket ['on'] ('message', Data => {
         try {
@@ -516,6 +517,20 @@ new Ws ['Server'] (new Object ({
                         	switch (ParsePlugins [1]) {
                         		case 'Create':
                         			SendCMD ('/agent create');
+                        			if (!AgentStatus) {
+                        				AgentStatus = true;
+                                SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9AgentStatus §l§o§a 【Minecraft】 Agent 吉祥物召喚成功');
+                        			} else
+                              SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9AgentStatus §l§o§4 【Minecraft】 Agent 吉祥物召喚失敗，Agent 吉祥物已存在');
+                        		break;
+                        
+                        		case 'ComeBack':
+                        			SendCMD ('/agent tp');
+                        		SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9AgentSay §l§o§e 我來了 嘿嘿嘿');
+                        		break;
+                        
+                        		default:
+                            SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9PluginStatus §l§o§4該擴展插件屬性不存在');
                         	};
                         break;
                         
@@ -549,9 +564,7 @@ new Ws ['Server'] (new Object ({
             Coordinate [0] = parseInt (ParseData ['body'] ['properties'] ['PosX']) || 0;
             Coordinate [1] = parseInt (ParseData ['body'] ['properties'] ['PosY']) || 90;
             Coordinate [2] = parseInt (ParseData ['body'] ['properties'] ['PosZ']) || 0;
-            } else if (ParseData ['body'] ['eventName'] === 'AgentCreated') {
-              SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9AgentStatus §l§o§a 【Minecraft】Agent 吉祥物召喚成功');
-            }
+            };
         } catch (Err) {
             Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Logs/Errors/', `${new String (Math ['random'] () * 9329583).LOG}`), new String (Err))
         }

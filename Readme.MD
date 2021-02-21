@@ -21,6 +21,7 @@
 * 5.刪除了所有命令語句的前綴
 * 6.新增了三種新的命令
 * 7.修復了建築物生成插件報錯問題
+* 8.新增吉祥物行為命令
 </Br>
 
 ### 新命令
@@ -43,9 +44,10 @@
 * 17.設置坐標點: $Plugin: GoHome Set
 * 18.傳送坐標點: $Plugin: GoHome Get
 * 19.幫助: $Help
-* 20.音頻播放器: $Plugin: AudioMedio (Local & Online) (Path & Url) (未來命令)
-* 21.視頻播放器: $Plugin: VideoMedio (Local & Online) (Path & Url) (未來命令)
-* 22.點歌系統框架: $Plugin: PointSong SongName (未來命令)
+* 20.回來吉祥物 Agent: $Plugin: Agent ComeBack
+* 21.音頻播放器: $Plugin: AudioMedio (Local & Online) (Path & Url) (未來命令)
+* 22.視頻播放器: $Plugin: VideoMedio (Local & Online) (Path & Url) (未來命令)
+* 23.點歌系統框架: $Plugin: PointSong SongName (未來命令)
 </Br>
 
 ### 基本命令
