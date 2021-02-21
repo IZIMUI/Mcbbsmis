@@ -182,7 +182,7 @@ function UpdateGiftWhitelists (UserName, Mode) {
 function GiftConfigs (Event, Value, Values) {
 	switch (Event) {
 		case 'GiftStatus':
-			Interactives ['GiftStatus'] = new Boolean (Value ['toLowerCase'] ());
+			Interactives ['GiftStatus'] = Value;
 			Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/Interactives.JSON'), JSON ['stringify'] (Interactives), () => null)
 			break;
 			
@@ -441,12 +441,12 @@ new Ws ['Server'] (new Object ({
                         	case 'GiftStatus':
                         		switch (ParseConfigM [1]) {
                         		case 'True':
-                        			GiftConfigs ('GiftStatus', 'True');
+                        			GiftConfigs ('GiftStatus', true);
                         			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§c已更改禮物觸發狀態為 §l§o§a[True]');
                               break;
                                    
                         		case 'False':
-                        			GiftConfigs ('GiftStatus', 'False');
+                        			GiftConfigs ('GiftStatus', false);
                         			SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9GiftStatus §l§o§c已更改禮物觸發狀態為 §l§o§4[False]')
                               break;
                               
