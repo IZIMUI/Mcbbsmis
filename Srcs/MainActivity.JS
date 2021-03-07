@@ -7,6 +7,7 @@ const Os = require ('os');
 const Ws = require ('ws');
 const Ini = require ('ini');
 const Http = require ('http');
+const Https = require ('https');
 const Path = require ('path');
 const Querystring = require ('querystring');
 const {LiveTCP} = require ('bilibili-live-ws');
@@ -330,6 +331,43 @@ function Monitor (RoomID) {
     SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9ConnectStatus §l§o§a連接成功 正在監聽直播間彈幕');
 };
 
+console ['log'] (`-
+
+正在檢測 [ Mcbbsmis ]最新版本，請稍等...
+
+-------Mcbbsmis Service-------
+
+-
+
+
+`);
+
+Https ['get'] ('https://cdn.jsdelivr.net/gh/lZiMUl/Mcbbsmis/Package.JSON', Response => {
+	let LocalVersion = JSON ['parse'] (Fs ['readFileSync'] (`${Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Package')}.JSON`)) ['Vn'];
+	let Resource = new Array;
+	Response ['on'] ('data', Data => Resource ['push'] (Data));
+	Response ['on'] ('end', Data => {
+		if (JSON ['parse'] (Resource ['join'] ()) ['Vn'] > LocalVersion)
+		console ['log'] (`-
+
+[ Mcbbsmis ] 新版本已發佈，請更新
+
+-------Mcbbsmis Service-------
+
+-
+
+
+`); else console ['log'] (`-
+
+[ Mcbbsmis ] 當前已是最新版本
+
+-------Mcbbsmis Service-------
+
+-
+
+
+`);
+
 //開啟WebSocket服務器
 new Ws ['Server'] (new Object ({
     "host": Configuration ['WebSocket'] ['Host'],
@@ -353,8 +391,8 @@ new Ws ['Server'] (new Object ({
                 //解析消息
                 let ParseHelp = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Help');
                 let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Send: ');
-                let ParseConfig = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Config: ');
-                let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugin: ');
+                let ParseConfig = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Configs: ');
+                let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugins: ');
                 //判斷命令前綴
                 if (ParseHelp [0] === '$')
                 SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Helper §l§o§4無法幫助，懶得寫，去Github查看命令，以後肯定會寫上的。');
@@ -587,5 +625,33 @@ console ['log'] (`-
 /Connect ws://${Configuration ['WebSocket'] ['Host']}:${JSON ['parse'] (Configuration ['WebSocket'] ['Port'])}
 
 -------Mcbbsmis Service-------
-
 -`)
+	})
+});
+
+class Import {
+	constructor (Name) {
+		let ModuleLists = new Object;
+		if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object String]') {
+			global [Import ['Refactor'] (Name)] = require (Name);
+			ModuleLists [Import ['Refactor'] (Name)] = require (Name);
+		} else if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object Array]') {
+			Name ['forEach'] (Value => {
+				global [Import ['Refactor'] (Value)] = require (Value);
+			});
+			Name ['forEach'] (Value => {
+				ModuleLists [Import ['Refactor'] (Value)] = require (Value);
+			});
+		};
+		return ModuleLists;
+	};
+	
+	static Refactor (Name) {
+		let NewName = new Array;
+		if (new RegExp ('-', 'img') ['test'] (Name)) Name ['split'] ('-') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
+		else if (new RegExp ('_', 'img') ['test'] (Name)) Name ['split'] ('_') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
+		else Name ['split'] ('') ['forEach'] (Value => NewName ['push'] (Value));
+		NewName ['unshift'] (NewName ['shift'] () ['toUpperCase'] ());
+		return NewName ['join'] ('');
+	};
+};

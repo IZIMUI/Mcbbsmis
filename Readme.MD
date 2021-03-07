@@ -22,48 +22,50 @@
 * 6.新增了三種新的命令
 * 7.修復了建築物生成插件報錯問題
 * 8.新增吉祥物行為命令
+* 9.已將 Config & Plugin 改為 Configs & Plugins
+* 10.已添加啟動自檢測更新
 </Br>
 
 ### 新命令
-* 1.添加彈幕黑名單: $Config: BarrageBlacklists Add 用戶名
-* 2.刪除彈幕黑名單: $Config: BarrageBlacklists Delete 用戶名
-* 3.添加關鍵詞使用者: $Config: KeywordUsers Add 用戶名
-* 4.刪除關鍵詞使用者: $Config: KeywordUsers Delete 用戶名
-* 5.添加投餵禮物觸發事件者: $Config: GiftWhitelists Add 用戶名
-* 6.刪除投餵禮物觸發事件者: $Config: GiftWhitelists Delete 用戶名
-* 7.開啟投餵禮物觸發隨機事件狀態: $Config: GiftStatus (True & False)
-* 8.添加投餵禮物觸發因素: $Config: GiftGroup Add GiftName
-* 9.刪除投餵禮物觸發因素: $Config: GiftGroup Delete GiftName
-* 10.設定投餵禮物觸發數量: $Config: GiftQuantity Value
+* 1.添加彈幕黑名單: $Configs: BarrageBlacklists Add 用戶名
+* 2.刪除彈幕黑名單: $Configs: BarrageBlacklists Delete 用戶名
+* 3.添加關鍵詞使用者: $Configs: KeywordUsers Add 用戶名
+* 4.刪除關鍵詞使用者: $Configs: KeywordUsers Delete 用戶名
+* 5.添加投餵禮物觸發事件者: $Configs: GiftWhitelists Add 用戶名
+* 6.刪除投餵禮物觸發事件者: $Configs: GiftWhitelists Delete 用戶名
+* 7.開啟投餵禮物觸發隨機事件狀態: $Configs: GiftStatus (True & False)
+* 8.添加投餵禮物觸發因素: $Configs: GiftGroup Add GiftName
+* 9.刪除投餵禮物觸發因素: $Configs: GiftGroup Delete GiftName
+* 10.設定投餵禮物觸發數量: $Configs: GiftQuantity Value
 * 11.發送關鍵詞命令: $Keyword:關鍵詞
-* 12.建築物本地生成命令: $Plugin: Building Local 建築物文件名
-* 13.建築物網絡生成命令: $Plugin: Building Online 建築物文件鏈接
-* 14.禮品袋隨機抽獎命令: $Plugin: Lottery
-* 15.定時器命令: $Plugin: Tte Time Commands (暫時失效)
-* 16.創建吉祥物 Agent: $Plugin: Agent Create
-* 17.設置坐標點: $Plugin: GoHome Set
-* 18.傳送坐標點: $Plugin: GoHome Get
+* 12.建築物本地生成命令: $Plugins: Building Local 建築物文件名
+* 13.建築物網絡生成命令: $Plugins: Building Online 建築物文件鏈接
+* 14.禮品袋隨機抽獎命令: $Plugins: Lottery
+* 15.定時器命令: $Plugins: Tte Time Commands (暫時失效)
+* 16.創建吉祥物 Agent: $Plugins: Agent Create
+* 17.設置坐標點: $Plugins: GoHome Set
+* 18.傳送坐標點: $Plugins: GoHome Get
 * 19.幫助: $Help
-* 20.回來吉祥物 Agent: $Plugin: Agent ComeBack
-* 21.音頻播放器: $Plugin: AudioMedio (Local & Online) (Path & Url) (未來命令)
-* 22.視頻播放器: $Plugin: VideoMedio (Local & Online) (Path & Url) (未來命令)
-* 23.點歌系統框架: $Plugin: PointSong SongName (未來命令)
+* 20.回來吉祥物 Agent: $Plugins: Agent ComeBack
+* 21.音頻播放器: $Plugins: AudioMedio (Local & Online) (Path & Url) (未來命令)
+* 22.視頻播放器: $Plugins: VideoMedio (Local & Online) (Path & Url) (未來命令)
+* 23.點歌系統框架: $Plugins: PointSong SongName (未來命令)
 </Br>
 
 ### 基本命令
 * 1.幫助助手命令: $Help
 * 2.發送彈幕命令: $Send: 消息
-* 3.設定配置命令: $Config: 選項
+* 3.設定配置命令: $Configs: 選項
 * 4.關鍵詞語命令: $Keyword: 關鍵詞
-* 5.公開插件命令: $Plugin: 選項
+* 5.公開插件命令: $Plugins: 選項
 </Br>
 
 ## 項目目錄結構
 * Mcbbsmis
-    * Configs
+    * Configss
         * Lottery.JSON
         * Interactives.JSON
-        * ServiceConfig.INI
+        * ServiceConfigs.INI
     * Logs
         * Successs
         * Errors
@@ -76,8 +78,8 @@
 </Br>
 
 ### 使用教程
-* 1.打開設備文件管理器找到 [Mcbbsmis] 項目文件夾並進入 [Configs] 配置文件夾。
-* 2.配置 [ServiceConfig.INI] 服務屬性值 ([配置教學傳送門](https://b23.tv/ymEtPO) 私聊我即可)。
+* 1.打開設備文件管理器找到 [Mcbbsmis] 項目文件夾並進入 [Configss] 配置文件夾。
+* 2.配置 [ServiceConfigs.INI] 服務屬性值 ([配置教學傳送門](https://b23.tv/ymEtPO) 私聊我即可)。
 * 3.終端輸入 [node Mcbbsmis] 複製輸出消息 [請複製這個連接命令:] 下面的連接命令。
 * 4.進入 [Minecraft] 進入存檔 (前提: 必須打開作弊功能) 打開聊天欄粘貼連接命令回車。
 * 5.輸入發送彈幕命令 [$Send:消息]。
