@@ -1,15 +1,35 @@
 //設定嚴格模式
 'use strict';
 
+class Import {
+	constructor (Name) {
+		let ModuleLists = new Object;
+		if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object String]') {
+			global [Import ['Refactor'] (Name)] = require (Name);
+			ModuleLists [Import ['Refactor'] (Name)] = require (Name);
+		} else if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object Array]') {
+			Name ['forEach'] (Value => {
+				global [Import ['Refactor'] (Value)] = require (Value);
+			});
+			Name ['forEach'] (Value => {
+				ModuleLists [Import ['Refactor'] (Value)] = require (Value);
+			});
+		};
+		return ModuleLists;
+	};
+	
+	static Refactor (Name) {
+		let NewName = new Array;
+		if (new RegExp ('-', 'img') ['test'] (Name)) Name ['split'] ('-') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
+		else if (new RegExp ('_', 'img') ['test'] (Name)) Name ['split'] ('_') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
+		else Name ['split'] ('') ['forEach'] (Value => NewName ['push'] (Value));
+		NewName ['unshift'] (NewName ['shift'] () ['toUpperCase'] ());
+		return NewName ['join'] ('');
+	};
+};
+
 //基模塊
-const Fs = require ('fs');
-const Os = require ('os');
-const Ws = require ('ws');
-const Ini = require ('ini');
-const Http = require ('http');
-const Https = require ('https');
-const Path = require ('path');
-const Querystring = require ('querystring');
+new Import (new Array ('fs', 'os', 'ws', 'ini', 'http', 'https', 'path', 'querystring'));
 const {LiveTCP} = require ('bilibili-live-ws');
 
 const Bg = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/BuildingGenerator/MainActivity.JS'));
@@ -303,7 +323,7 @@ function Monitor (RoomID) {
     //彈幕監聽
     Live ['on'] ('DANMU_MSG', Message => {
         let User = Message ['info'] [2];
-        let ParseMessage = Message ['info'] [1] ['split'] ('Keyword: ');
+        let ParseMessage = Message ['info'] [1] ['split'] ('Keywords: ');
         if (ParseMessage [0] === '$')
         if (VerifyUsers (User [1], 'KeywordUsers')) {
           for (let Key in Interactives ['Keywords'])
@@ -628,30 +648,3 @@ console ['log'] (`-
 -`)
 	})
 });
-
-class Import {
-	constructor (Name) {
-		let ModuleLists = new Object;
-		if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object String]') {
-			global [Import ['Refactor'] (Name)] = require (Name);
-			ModuleLists [Import ['Refactor'] (Name)] = require (Name);
-		} else if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object Array]') {
-			Name ['forEach'] (Value => {
-				global [Import ['Refactor'] (Value)] = require (Value);
-			});
-			Name ['forEach'] (Value => {
-				ModuleLists [Import ['Refactor'] (Value)] = require (Value);
-			});
-		};
-		return ModuleLists;
-	};
-	
-	static Refactor (Name) {
-		let NewName = new Array;
-		if (new RegExp ('-', 'img') ['test'] (Name)) Name ['split'] ('-') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
-		else if (new RegExp ('_', 'img') ['test'] (Name)) Name ['split'] ('_') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
-		else Name ['split'] ('') ['forEach'] (Value => NewName ['push'] (Value));
-		NewName ['unshift'] (NewName ['shift'] () ['toUpperCase'] ());
-		return NewName ['join'] ('');
-	};
-};

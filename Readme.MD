@@ -37,7 +37,7 @@
 * 8.添加投餵禮物觸發因素: $Configs: GiftGroup Add GiftName
 * 9.刪除投餵禮物觸發因素: $Configs: GiftGroup Delete GiftName
 * 10.設定投餵禮物觸發數量: $Configs: GiftQuantity Value
-* 11.發送關鍵詞命令: $Keyword:關鍵詞
+* 11.發送關鍵詞命令: $Keywords: 關鍵詞
 * 12.建築物本地生成命令: $Plugins: Building Local 建築物文件名
 * 13.建築物網絡生成命令: $Plugins: Building Online 建築物文件鏈接
 * 14.禮品袋隨機抽獎命令: $Plugins: Lottery
@@ -53,16 +53,16 @@
 </Br>
 
 ### 基本命令
-* 1.幫助助手命令: $Help
+* 1.幫助助手命令: $Help 幫助
 * 2.發送彈幕命令: $Send: 消息
 * 3.設定配置命令: $Configs: 選項
-* 4.關鍵詞語命令: $Keyword: 關鍵詞
+* 4.關鍵詞語命令: $Keywords: 關鍵詞
 * 5.公開插件命令: $Plugins: 選項
 </Br>
 
 ## 項目目錄結構
 * Mcbbsmis
-    * Configss
+    * Configs
         * Lottery.JSON
         * Interactives.JSON
         * ServiceConfigs.INI
@@ -78,11 +78,11 @@
 </Br>
 
 ### 使用教程
-* 1.打開設備文件管理器找到 [Mcbbsmis] 項目文件夾並進入 [Configss] 配置文件夾。
+* 1.打開設備文件管理器找到 [Mcbbsmis] 項目文件夾並進入 [Configs] 配置文件夾。
 * 2.配置 [ServiceConfigs.INI] 服務屬性值 ([配置教學傳送門](https://b23.tv/ymEtPO) 私聊我即可)。
-* 3.終端輸入 [node Mcbbsmis] 複製輸出消息 [請複製這個連接命令:] 下面的連接命令。
+* 3.終端輸入 [termux-wake-lock && cd /storage/emulated/0/ && node Mcbbsmis] 來啟動 Mcbbsmis 服務，複製輸出消息 [請複製這個連接命令:] 下面的連接命令。
 * 4.進入 [Minecraft] 進入存檔 (前提: 必須打開作弊功能) 打開聊天欄粘貼連接命令回車。
-* 5.輸入發送彈幕命令 [$Send:消息]。
+* 5.輸入發送彈幕命令 [$Send: 消息]。
 * 6.打開BiliBili並進入您的直播間查看彈幕即可。
 * 7.如有錯誤，請在Github上提出問題即可 [報告問題傳送門](https://github.com/lZiMUl/Mcbbsmis/issues)。
 * 8.教程完畢。
