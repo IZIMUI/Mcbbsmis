@@ -367,7 +367,7 @@ Https ['get'] ('https://cdn.jsdelivr.net/gh/lZiMUl/Mcbbsmis/Package.JSON', Respo
 	let Resource = new Array;
 	Response ['on'] ('data', Data => Resource ['push'] (Data));
 	Response ['on'] ('end', Data => {
-		if (JSON ['parse'] (Resource ['join'] ()) ['Vn'] > LocalVersion)
+		if (JSON ['parse'] (Resource ['join'] ('')) ['Vn'] > LocalVersion)
 		console ['log'] (`-
 
 [ Mcbbsmis ] 新版本已發佈，請更新
@@ -411,6 +411,7 @@ new Ws ['Server'] (new Object ({
                 //解析消息
                 let ParseHelp = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Help');
                 let ParseMessage = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Send: ');
+                let ParseNode = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Node:');
                 let ParseConfig = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Configs: ');
                 let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugins: ');
                 //判斷命令前綴
@@ -419,6 +420,12 @@ new Ws ['Server'] (new Object ({
                 if (ParseMessage [0] === '$')
                 //將玩家聊天消息發送至BiliBili直播間
                 SendToBL (ParseMessage [1], true)
+                if (ParseNode [0] === '$')
+                try {
+                SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9NodeJS Logger: §l§o§a${eval (ParseNode [1])}`);
+                } catch (Err) {
+                	SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9NodeJS Logger: §l§o§4${Err}`);
+                };
                 if (ParseConfig [0] === '$') {
                     let ParseConfigM = ParseConfig [1] ['split'] (' ');
                     switch (ParseConfigM [0]) {

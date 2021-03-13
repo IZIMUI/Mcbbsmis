@@ -24,6 +24,7 @@
 * 8.新增吉祥物行為命令
 * 9.已將 Config & Plugin 改為 Configs & Plugins
 * 10.已添加啟動自檢測更新
+* 11.新增在遊戲聊天欄運行NodeJS環境
 </Br>
 
 ### 新命令
@@ -50,6 +51,7 @@
 * 21.音頻播放器: $Plugins: AudioMedio (Local & Online) (Path & Url) (未來命令)
 * 22.視頻播放器: $Plugins: VideoMedio (Local & Online) (Path & Url) (未來命令)
 * 23.點歌系統框架: $Plugins: PointSong SongName (未來命令)
+* 24.新增命令 $Node: JavaScript Code
 </Br>
 
 ### 基本命令
@@ -58,6 +60,7 @@
 * 3.設定配置命令: $Configs: 選項
 * 4.關鍵詞語命令: $Keywords: 關鍵詞
 * 5.公開插件命令: $Plugins: 選項
+* 6.運行Node命令: 新增命令 $Node: JavaScript Code
 </Br>
 
 ## 項目目錄結構
@@ -93,5 +96,6 @@
 * 2.【[教科书式帕琪](https://b23.tv/rTsY3K)】
 * 3.【[-星陌雪-](https://b23.tv/t7T9y9)】
 * 4.【[F小冷](https://b23.tv/ukCYSs)】
+* 5.【[咸鸡嘎吱脆](https://b23.tv/4GRJVD)】
 #### 期待您的加入測試
 </Br>
