@@ -1,5 +1,5 @@
 # Mcbbsmis
-
+[![](https://img.shields.io/github/stars/lZiMUl/Mcbbsmis)]
 [![Version npm](https://img.shields.io/npm/v/mcbbsmis.svg?logo=npm)](https://www.npmjs.com/package/mcbbsmis)
 [![Build](https://img.shields.io/github/workflow/status/lZiMUl/Mcbbsmis/CI/master?label=build&logo=github)](https://github.com/lZiMUl/Mcbbsmis/actions?query=workflow%3ACI+branch%3Amaster)
 
