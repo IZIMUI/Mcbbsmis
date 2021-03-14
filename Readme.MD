@@ -2,7 +2,7 @@
 [![Stars](https://img.shields.io/github/stars/lZiMUl/Mcbbsmis?label=Stars)](https://github.com/lZiMUl/Mcbbsmis.git)
 [![License](https://img.shields.io/github/license/lZiMUl/Mcbbsmis?label=License)](https://github.com/lZiMUl/Mcbbsmis.git)
 [![Issues](https://img.shields.io/github/issues/lZiMUl/Mcbbsmis?label=Issues)](https://github.com/lZiMUl/Mcbbsmis.git)
-[![Npm](https://img.shields.io/npm/v/mcbbsmis.svg?logo=npm)](https://www.npmjs.com/package/mcbbsmis)
+[![Npm](https://img.shields.io/npm/v/mcbbsmis.svg?label=Npm&logo=npm)](https://www.npmjs.com/package/mcbbsmis)
 
 [項目開發者個人主頁](https://b23.tv/ymEtPO)
 </Br>
