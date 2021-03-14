@@ -4,7 +4,7 @@
 [![Github](https://img.shields.io/github/stars/lZiMUl/Mcbbsmis?label=Stars&logo=github)](https://github.com/lZiMUl/Mcbbsmis.git)
 [![Github](https://img.shields.io/github/license/lZiMUl/Mcbbsmis?label=License&logo=github)](https://github.com/lZiMUl/Mcbbsmis.git)
 [![Npm](https://img.shields.io/npm/v/mcbbsmis.svg?label=Npm&logo=npm)](https://www.npmjs.com/package/mcbbsmis)
-[![BiliBili](https://img.shields.io/github/forks/lZiMUl/Mcbbsmis?label=Mcbbsmis開發者B站&logo=bilibili)](https://b23.tv/ymEtPO)
+[![BiliBili](https://img.shields.io/badge/Mcbbsmis開發者B站&-ok-red?logo=bilibili)](https://b23.tv/ymEtPO)
 </Br>
 
 ## 下個版本內容
