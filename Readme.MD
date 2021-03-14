@@ -1,7 +1,8 @@
 # Mcbbsmis
 [![Stars](https://img.shields.io/github/stars/lZiMUl/Mcbbsmis)](https://github.com/lZiMUl/Mcbbsmis.git)
-[![Version npm](https://img.shields.io/npm/v/mcbbsmis.svg?logo=npm)](https://www.npmjs.com/package/mcbbsmis)
-[![Build](https://img.shields.io/github/workflow/status/lZiMUl/Mcbbsmis/CI/master?label=build&logo=github)](https://github.com/lZiMUl/Mcbbsmis/actions?query=workflow%3ACI+branch%3Amaster)
+[![License](https://img.shields.io/github/license/lZiMUl/Mcbbsmis)](https://github.com/lZiMUl/Mcbbsmis.git)
+[![Issues](https://img.shields.io/github/issues/lZiMUl/Mcbbsmis)](https://github.com/lZiMUl/Mcbbsmis.git)
+[![Npm](https://img.shields.io/npm/v/mcbbsmis.svg?logo=npm)](https://www.npmjs.com/package/mcbbsmis)
 
 [項目開發者個人主頁](https://b23.tv/ymEtPO)
 </Br>
