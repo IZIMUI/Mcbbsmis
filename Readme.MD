@@ -8,22 +8,22 @@
 </Br>
 
 ## 特別鳴謝所有測試人員
-* 1.[![BiliBili](https://img.shields.io/badge/BiliBili-骥翼志-red?logo=bilibili)](https://b23.tv/lPZ0gr)
-* 2.[![BiliBili](https://img.shields.io/badge/BiliBili-教科书式帕琪-red?logo=bilibili)](https://b23.tv/rTsY3K)
-* 3.[![BiliBili](https://img.shields.io/badge/BiliBili---星陌雪---red?logo=bilibili)](https://b23.tv/t7T9y9)
-* 4.[![BiliBili](https://img.shields.io/badge/BiliBili-F小冷-red?logo=bilibili)](https://b23.tv/ukCYSs)
-* 5.[![BiliBili](https://img.shields.io/badge/BiliBili-咸鸡嘎吱脆-red?logo=bilibili)](https://b23.tv/4GRJVD)
+* [![BiliBili](https://img.shields.io/badge/BiliBili-骥翼志-red?logo=bilibili)](https://b23.tv/lPZ0gr)
+* [![BiliBili](https://img.shields.io/badge/BiliBili-教科书式帕琪-red?logo=bilibili)](https://b23.tv/rTsY3K)
+* [![BiliBili](https://img.shields.io/badge/BiliBili---星陌雪---red?logo=bilibili)](https://b23.tv/t7T9y9)
+* [![BiliBili](https://img.shields.io/badge/BiliBili-F小冷-red?logo=bilibili)](https://b23.tv/ukCYSs)
+* [![BiliBili](https://img.shields.io/badge/BiliBili-咸鸡嘎吱脆-red?logo=bilibili)](https://b23.tv/4GRJVD)
 #### 期待您的加入測試
 </Br>
 
 ## 下個版本內容
-* 1.【媒體接口】
-* 2.【網站接口】
-* 3.【控制面板】
-* 4.【App遠程控制】
-* 5.【手機陀螺儀控制視角】
-* 6.【公佈一些實用的API接口】
-* 7.【根據現實事件改變遊戲事件】
+* 【媒體接口】
+* 【網站接口】
+* 【控制面板】
+* 【App遠程控制】
+* 【手機陀螺儀控制視角】
+* 【公佈一些實用的API接口】
+* 【根據現實事件改變遊戲事件】
 </Br>
 
 ## 這個版本內容
