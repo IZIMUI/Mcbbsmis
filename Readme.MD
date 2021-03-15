@@ -7,7 +7,7 @@
 [![Github](https://img.shields.io/github/license/lZiMUl/Mcbbsmis?label=License&logo=github)](https://github.com/lZiMUl/Mcbbsmis.git)
 </Br>
 
-## 特別鳴謝測試人員名單
+## 特別鳴謝所有測試人員
 * 1.[![BiliBili](https://img.shields.io/badge/BiliBili-骥翼志-red?logo=bilibili)](https://b23.tv/lPZ0gr)
 * 2.[![BiliBili](https://img.shields.io/badge/BiliBili-教科书式帕琪-red?logo=bilibili)](https://b23.tv/rTsY3K)
 * 3.[![BiliBili](https://img.shields.io/badge/BiliBili-星陌雪-red?logo=bilibili)](https://b23.tv/t7T9y9)
