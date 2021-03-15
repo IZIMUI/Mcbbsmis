@@ -7,6 +7,15 @@
 [![BiliBili](https://img.shields.io/badge/BiliBili-Mcbbsmis開發者B站&-red?logo=bilibili)](https://b23.tv/ymEtPO)
 </Br>
 
+## 特別鳴謝測試人員名單
+* 1.[![BiliBili](https://img.shields.io/badge/BiliBili-骥翼志-red?logo=bilibili)](https://b23.tv/lPZ0gr)
+* 2.[![BiliBili](https://img.shields.io/badge/BiliBili-教科书式帕琪-red?logo=bilibili)](https://b23.tv/rTsY3K)
+* 3.[![BiliBili](https://img.shields.io/badge/BiliBili-\-星陌雪\--red?logo=bilibili)](https://b23.tv/t7T9y9)
+* 4.[![BiliBili](https://img.shields.io/badge/BiliBili-F小冷-red?logo=bilibili)](https://b23.tv/ukCYSs)
+* 5.[![BiliBili](https://img.shields.io/badge/BiliBili-咸鸡嘎吱脆-red?logo=bilibili)](https://b23.tv/4GRJVD)
+#### 期待您的加入測試
+</Br>
+
 ## 下個版本內容
 * 1.【媒體接口】
 * 2.【網站接口】
@@ -94,13 +103,4 @@
 * 6.打開BiliBili並進入您的直播間查看彈幕即可。
 * 7.如有錯誤，請在Github上提出問題即可 [報告問題傳送門](https://github.com/lZiMUl/Mcbbsmis/issues)。
 * 8.教程完畢。
-</Br>
-
-## 特別鳴謝測試人員名單
-* 1.【[![BiliBili](https://img.shields.io/badge/BiliBili-骥翼志-red?logo=bilibili)](https://b23.tv/lPZ0gr)】
-* 2.【[![BiliBili](https://img.shields.io/badge/BiliBili-教科书式帕琪-red?logo=bilibili)](https://b23.tv/rTsY3K)】
-* 3.【[![BiliBili](https://img.shields.io/badge/BiliBili--星陌雪--red?logo=bilibili)](https://b23.tv/t7T9y9)】
-* 4.【[![BiliBili](https://img.shields.io/badge/BiliBili-F小冷-red?logo=bilibili)](https://b23.tv/ukCYSs)】
-* 5.【[![BiliBili](https://img.shields.io/badge/BiliBili-咸鸡嘎吱脆-red?logo=bilibili)](https://b23.tv/4GRJVD)】
-#### 期待您的加入測試
 </Br>
