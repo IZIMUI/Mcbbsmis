@@ -10,7 +10,7 @@
 ## 特別鳴謝所有測試人員
 * 1.[![BiliBili](https://img.shields.io/badge/BiliBili-骥翼志-red?logo=bilibili)](https://b23.tv/lPZ0gr)
 * 2.[![BiliBili](https://img.shields.io/badge/BiliBili-教科书式帕琪-red?logo=bilibili)](https://b23.tv/rTsY3K)
-* 3.[![BiliBili](https://img.shields.io/badge/BiliBili-%2d星陌雪%2d-red?logo=bilibili)](https://b23.tv/t7T9y9)
+* 3.[![BiliBili](https://img.shields.io/badge/BiliBili---星陌雪---red?logo=bilibili)](https://b23.tv/t7T9y9)
 * 4.[![BiliBili](https://img.shields.io/badge/BiliBili-F小冷-red?logo=bilibili)](https://b23.tv/ukCYSs)
 * 5.[![BiliBili](https://img.shields.io/badge/BiliBili-咸鸡嘎吱脆-red?logo=bilibili)](https://b23.tv/4GRJVD)
 #### 期待您的加入測試
