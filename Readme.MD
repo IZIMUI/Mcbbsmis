@@ -1,6 +1,7 @@
 # Mcbbsmis
 [![BiliBili](https://img.shields.io/badge/BiliBili-Mcbbsmis%20開發者B站-red?logo=bilibili)](https://b23.tv/ymEtPO)
 [![Npm](https://img.shields.io/npm/v/mcbbsmis.svg?label=Npm&logo=npm)](https://www.npmjs.com/package/mcbbsmis)
+[![Snyk](https://snyk.io/advisor/npm-package/mcbbsmis/badge.svg)](https://snyk.io/advisor/npm-package/mcbbsmis)
 [![Github](https://img.shields.io/github/issues/lZiMUl/Mcbbsmis?label=Issues&logo=github)](https://github.com/lZiMUl/Mcbbsmis/issues)
 [![Github](https://img.shields.io/github/forks/lZiMUl/Mcbbsmis?label=Forks&logo=github)](https://github.com/lZiMUl/Mcbbsmis/network/members)
 [![Github](https://img.shields.io/github/stars/lZiMUl/Mcbbsmis?label=Stars&logo=github)](https://github.com/lZiMUl/Mcbbsmis/stargazers)
