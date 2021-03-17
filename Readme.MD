@@ -18,6 +18,17 @@
 #### 期待您的加入測試
 </Br>
 
+### 使用教程
+* 1.打開設備文件管理器找到 [Mcbbsmis] 項目文件夾並進入 [Configs] 配置文件夾。
+* 2.配置 [ServiceConfigs.INI] 服務屬性值 ([配置教學傳送門](https://b23.tv/ymEtPO) 私聊我即可)。
+* 3.終端輸入 [termux-wake-lock && cd /storage/emulated/0/ && node Mcbbsmis] 來啟動 Mcbbsmis 服務，複製輸出消息 [請複製這個連接命令:] 下面的連接命令。
+* 4.進入 [Minecraft] 進入存檔 (前提: 必須打開作弊功能) 打開聊天欄粘貼連接命令回車。
+* 5.輸入發送彈幕命令 [$Send: 消息]。
+* 6.打開BiliBili並進入您的直播間查看彈幕即可。
+* 7.如有錯誤，請在Github上提出問題即可 [報告問題傳送門](https://github.com/lZiMUl/Mcbbsmis/issues)。
+* 8.教程完畢。
+</Br>
+
 ## 下個版本內容
 * 【媒體接口】
 * 【網站接口】
@@ -94,15 +105,4 @@
     * Package.JSON
     * Package-Lock.JSON
     * Readme.MD
-</Br>
-
-### 使用教程
-* 1.打開設備文件管理器找到 [Mcbbsmis] 項目文件夾並進入 [Configs] 配置文件夾。
-* 2.配置 [ServiceConfigs.INI] 服務屬性值 ([配置教學傳送門](https://b23.tv/ymEtPO) 私聊我即可)。
-* 3.終端輸入 [termux-wake-lock && cd /storage/emulated/0/ && node Mcbbsmis] 來啟動 Mcbbsmis 服務，複製輸出消息 [請複製這個連接命令:] 下面的連接命令。
-* 4.進入 [Minecraft] 進入存檔 (前提: 必須打開作弊功能) 打開聊天欄粘貼連接命令回車。
-* 5.輸入發送彈幕命令 [$Send: 消息]。
-* 6.打開BiliBili並進入您的直播間查看彈幕即可。
-* 7.如有錯誤，請在Github上提出問題即可 [報告問題傳送門](https://github.com/lZiMUl/Mcbbsmis/issues)。
-* 8.教程完畢。
 </Br>
