@@ -1,7 +1,7 @@
 //設定嚴格模式
 'use strict';
 
-const Import = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Srcs/Import.JS'));
+const Import = require ('./Import.JS');
 
 //基模塊
 new Import (new Array ('fs', 'os', 'ws', 'ini', 'http', 'https', 'path', 'querystring'));

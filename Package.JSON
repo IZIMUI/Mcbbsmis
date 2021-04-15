@@ -11,8 +11,8 @@
         "email": "AA2908554069@gmail.com",
         "url": "https://b23.tv/ymEtPO"
     }],
-    "version": "22.21.82",
-    "Vn": 5,
+    "version": "22.21.83",
+    "Vn": 6,
     "license": "MIT",
     "homepage": "https://b23.tv/ymEtPO",
     "main": "./Srcs/MainActivity.JS",

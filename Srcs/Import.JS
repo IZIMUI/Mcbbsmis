@@ -2,14 +2,14 @@ class MainActivity {
 	constructor (Name) {
 		let ModuleLists = new Object;
 		if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object String]') {
-			global [Import ['Refactor'] (Name)] = require (Name);
-			ModuleLists [Import ['Refactor'] (Name)] = require (Name);
+			global [MainActivity ['Refactor'] (Name)] = require (Name);
+			ModuleLists [MainActivity ['Refactor'] (Name)] = require (Name);
 		} else if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object Array]') {
 			Name ['forEach'] (Value => {
-				global [Import ['Refactor'] (Value)] = require (Value);
+				global [MainActivity ['Refactor'] (Value)] = require (Value);
 			});
 			Name ['forEach'] (Value => {
-				ModuleLists [Import ['Refactor'] (Value)] = require (Value);
+				ModuleLists [MainActivity ['Refactor'] (Value)] = require (Value);
 			});
 		};
 		return ModuleLists;
