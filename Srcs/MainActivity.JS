@@ -305,7 +305,8 @@ ${Configuration ['BiliBili'] ['Csrf']}
         else if (Status ['code'] === -500)
         SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9SendStatus §l§o§4內容過長');
         else
-        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9SendStatus §l§o§4${JSON ['stringify'] (Status)}`)
+        SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9SendStatus §l§o§4${JSON ['stringify'] (Status)}`);
+	Request ['abort'] ();
     })
 }
 );
