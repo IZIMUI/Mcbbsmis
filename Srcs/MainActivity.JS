@@ -1,32 +1,7 @@
 //設定嚴格模式
 'use strict';
 
-class Import {
-	constructor (Name) {
-		let ModuleLists = new Object;
-		if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object String]') {
-			global [Import ['Refactor'] (Name)] = require (Name);
-			ModuleLists [Import ['Refactor'] (Name)] = require (Name);
-		} else if (Object ['prototype'] ['toString'] ['call'] (Name) === '[object Array]') {
-			Name ['forEach'] (Value => {
-				global [Import ['Refactor'] (Value)] = require (Value);
-			});
-			Name ['forEach'] (Value => {
-				ModuleLists [Import ['Refactor'] (Value)] = require (Value);
-			});
-		};
-		return ModuleLists;
-	};
-	
-	static Refactor (Name) {
-		let NewName = new Array;
-		if (new RegExp ('-', 'img') ['test'] (Name)) Name ['split'] ('-') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
-		else if (new RegExp ('_', 'img') ['test'] (Name)) Name ['split'] ('_') ['forEach'] (Value => NewName ['push'] (Value ['split'] ('') [0]));
-		else Name ['split'] ('') ['forEach'] (Value => NewName ['push'] (Value));
-		NewName ['unshift'] (NewName ['shift'] () ['toUpperCase'] ());
-		return NewName ['join'] ('');
-	};
-};
+const Import = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Srcs/Import.JS'));
 
 //基模塊
 new Import (new Array ('fs', 'os', 'ws', 'ini', 'http', 'https', 'path', 'querystring'));
@@ -256,17 +231,45 @@ function VerifyUsers (UserName, Value) {
 //將玩家聊天消息發送至直播間函數
 function SendToBL (Message, Rcs) {
     //消息進行編碼
-    let EncodeMessage =  Querystring ['encode'] (new Object ({
-        "color": 16777215,
-        "fontsize":25,
-        "mode": 1,
-        "msg": Message,
-        "rnd": new Date () ['getTime'] (),
-        "roomid": Configuration ['BiliBili'] ['RoomID'],
-        "bubble": 0,
-        "csrf_token": Configuration ['BiliBili'] ['Csrf'],
-        "csrf": Configuration ['BiliBili'] ['Csrf']
-        }));
+    let EncodeMessage = `------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="bubble"
+
+0
+------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="msg"
+
+${Message}
+------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="color"
+
+16777215
+------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="mode"
+
+1
+------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="fontsize"
+
+25
+------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="rnd"
+
+${new Date () ['getTime'] ()}
+------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="roomid"
+
+${Configuration ['BiliBili'] ['RoomID']}
+------${Configuration ['BiliBili'] ['Wkfb']}
+Content-Disposition: form-data; name="csrf"
+
+${Configuration ['BiliBili'] ['Csrf']}
+------${Configuration ['BiliBili'] ['Wkfb']}--
+Content-Disposition: form-data; name="csrf_token"
+
+${Configuration ['BiliBili'] ['Csrf']}
+------${Configuration ['BiliBili'] ['Wkfb']}--
+`;
+
     //設定請求配置
     let RequestConfiguration = new Object ({
         "protocol": "http:",
@@ -277,17 +280,17 @@ function SendToBL (Message, Rcs) {
         "headers": {
             "Host": "api.live.bilibili.com",
             "content-length": EncodeMessage? EncodeMessage ['length']: 0,
-            "accept": "application/json, text/javascript, *; q=0.01",
-            "dnt": 1,
             "user-agent": Configuration ['BiliBili'] ['User-Agent'],
-            "content-type": "application/x-www-form-urlencoded; charset\u003dUTF-8",
+            "content-type": `multipart/form-data; boundary=----${Configuration ['BiliBili'] ['Wkfb']}`,
+            "accept": "*/*",
             "origin": "https://live.bilibili.com",
+            "x-requested-with": "mark.via",
             "sec-fetch-site": "same-site",
             "sec-fetch-mode": "cors",
             "sec-fetch-dest": "empty",
             "referer": "https://live.bilibili.com/",
-            "accept-encoding": "gzip, deflate, br",
-            "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-TW;q=0.6,zh;q=0.5",
+            "accept-encoding": "gzip, deflate",
+            "accept-language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7",
             "Cookie": Configuration ['BiliBili'] ['Cookie']
         }});
     //開始請求直播間
@@ -388,6 +391,7 @@ Https ['get'] ('https://cdn.jsdelivr.net/gh/lZiMUl/Mcbbsmis/Package.JSON', Respo
 
 `);
 
+
 //開啟WebSocket服務器
 new Ws ['Server'] (new Object ({
     "host": Configuration ['WebSocket'] ['Host'],
@@ -422,7 +426,13 @@ new Ws ['Server'] (new Object ({
                 SendToBL (ParseMessage [1], true)
                 if (ParseNode [0] === '$')
                 try {
-                SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9NodeJS Logger: §l§o§a${eval (ParseNode [1])}`);
+                	let Console = {
+                		"Log": Message => {
+                			SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9NodeJS Console Log: §l§o§a${Message}`);
+                			return true;
+                		}
+                	};
+                	SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9NodeJS Logger: §l§o§a${eval (ParseNode [1])}`);
                 } catch (Err) {
                 	SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9NodeJS Logger: §l§o§4${Err}`);
                 };
@@ -631,7 +641,7 @@ new Ws ['Server'] (new Object ({
             Coordinate [2] = parseInt (ParseData ['body'] ['properties'] ['PosZ']) || 0;
             };
         } catch (Err) {
-            Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Logs/Errors/', `${new String (Math ['random'] () * 9329583).LOG}`), new String (Err))
+            Fs ['writeFile'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Logs/Errors/', `${new String (Math ['random'] () * 9329583)}.LOG`), new String (Err))
         }
     })
 });
