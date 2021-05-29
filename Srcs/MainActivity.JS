@@ -422,7 +422,7 @@ new Ws ['Server'] (new Object ({
                 let ParsePlugin = ParseData ['body'] ['properties'] ['Message'] ['split'] ('Plugins: ');
                 //判斷命令前綴
                 if (ParseHelp [0] === '$')
-                SendMTM ('§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Helper §l§o§4無法幫助，懶得寫，去Github查看命令，以後肯定會寫上的。');
+                SendMTM (`§l§o§b(§l§o§3Mcbbsmis§l§o§b) §l§o§9Helper §l§o§4${Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Readme.MD'), 'UTF-8') }`);
                 if (ParseMessage [0] === '$')
                 //將玩家聊天消息發送至BiliBili直播間
                 SendToBL (ParseMessage [1], true)
