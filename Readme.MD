@@ -11,9 +11,7 @@
 ## 特別鳴謝所有測試人員
 * [![BiliBili](https://img.shields.io/badge/BiliBili-骥翼志-FF8C00?logo=bilibili)](https://b23.tv/lPZ0gr)
 * [![BiliBili](https://img.shields.io/badge/BiliBili-教科书式帕琪-FF8C00?logo=bilibili)](https://b23.tv/rTsY3K)
-* [![BiliBili](https://img.shields.io/badge/BiliBili---星陌雪---FF8C00?logo=bilibili)](https://b23.tv/t7T9y9)
 * [![BiliBili](https://img.shields.io/badge/BiliBili-F小冷-FF8C00?logo=bilibili)](https://b23.tv/ukCYSs)
-* [![BiliBili](https://img.shields.io/badge/BiliBili-咸鸡嘎吱脆-FF8C00?logo=bilibili)](https://b23.tv/4GRJVD)
 * [![BiliBili](https://img.shields.io/badge/BiliBili-二书子-FF8C00?logo=bilibili)](https://b23.tv/hmzHVh)
 #### 期待您的加入測試
 </Br>
@@ -52,6 +50,7 @@
 * 9.已將 Config & Plugin 改為 Configs & Plugins
 * 10.已添加啟動自檢測更新
 * 11.新增在遊戲聊天欄運行NodeJS環境
+* 12.添加了SRC類，需要配合 [$Node] 命令使用
 </Br>
 
 ### 新命令
@@ -79,6 +78,7 @@
 * 22.視頻播放器: $Plugins: VideoMedio (Local & Online) (Path & Url) (未來命令)
 * 23.點歌系統框架: $Plugins: PointSong SongName (未來命令)
 * 24.新增命令 $Node: JavaScript Code
+* 25.新增類 class SRC (全稱 String Random Colors)，配合 [$Node] 命令來使用，使用方法 $Node: SendMTM (new SRC (佈爾值, 字符串) ['getContent'] ())
 </Br>
 
 ### 基本命令

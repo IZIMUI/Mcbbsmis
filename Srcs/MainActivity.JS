@@ -14,6 +14,7 @@ const Vm = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/VideoM
 const Am = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/AudioMedio/MainActivity.JS'));
 const Ps = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/PointSong/MainActivity.JS'));
 const Gm = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/GoHome/MainActivity.JS'));
+const SRC = require (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Plugins/StringRandomColors/MainActivity.JS'));
 
 //基對象定義
 const ReadConfig = FileName => JSON ['parse'] (new String (Fs ['readFileSync'] (Path ['join'] (Path ['resolve'] (), 'Mcbbsmis/Configs/', `${FileName}.JSON`))));
