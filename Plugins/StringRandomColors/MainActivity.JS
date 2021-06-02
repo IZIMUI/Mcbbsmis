@@ -3,7 +3,7 @@ class SRC {
 	static Result = null;
 
 	constructor (Mode = false, Content = 'String Random Colors') {
-		if (Mode && Object ['prototype'] ['toString'] ['call'] (Mode) === '[object Boolean]')
+		if (Object ['prototype'] ['toString'] ['call'] (Mode) === '[object Boolean]')
 		if (Mode)
 		SRC ['Result'] = SRC ['SSP'] (Content);
 		else 
@@ -16,7 +16,12 @@ class SRC {
 
 	static SSP (Content) {
 		SRC ['Catch'] ['splice'] (0, SRC ['Catch'] ['length']);
-		Content ['split'] ('') ['forEach'] (Value => SRC ['Catch'] ['push'] (SRC ['GRC'] (Value)));
+		Content ['split'] ('') ['forEach'] (Value => {
+			if (!new RegExp ('\\s', 'img') ['test'] (Value)) 
+			SRC ['Catch'] ['push'] (SRC ['GRC'] (Value));
+			else
+			SRC ['Catch'] ['push'] (Value);
+		})
 		return SRC ['Catch'] ['join'] ('')
 	}
 	
