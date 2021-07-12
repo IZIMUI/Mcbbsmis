@@ -11,8 +11,8 @@
         "email": "AA2908554069@gmail.com",
         "url": "https://b23.tv/ymEtPO"
     }],
-    "version": "23.21.83",
-    "Vn": 7,
+    "version": "23.21.84",
+    "Vn": 8,
     "license": "MIT",
     "homepage": "https://b23.tv/ymEtPO",
     "main": "./Srcs/MainActivity.JS",
@@ -27,7 +27,7 @@
         "Interaction"
     ],
     "engines": {
-        "node": "^14.14.0"
+        "node": "14.15.4"
     },
     "dependencies": {
         "ws": "^7.4.0",
